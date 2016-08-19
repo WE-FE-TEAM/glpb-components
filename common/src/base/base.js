@@ -11,6 +11,7 @@ const $ = window.jQuery;
 const utils = require('../utils/utils.js');
 const componentFactory = require('../component-factory/component-factory.js');
 
+require('./base.scss');
 
 function noop(){}
 

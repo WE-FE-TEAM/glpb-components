@@ -10,6 +10,8 @@ const ComponentBase = require('../../base/base.js');
 
 const utils = require('../../utils/utils.js');
 
+require('./glpb-image.scss');
+
 const $ = ComponentBase.$;
 
 const tpl = `<div><img /></div>`;

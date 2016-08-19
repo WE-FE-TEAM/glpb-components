@@ -7,6 +7,7 @@
 
 const ComponentBase = require('../../base/base.js');
 
+require('./layout-column.scss');
 
 const $ = ComponentBase.$;
 const utils = ComponentBase.utils;

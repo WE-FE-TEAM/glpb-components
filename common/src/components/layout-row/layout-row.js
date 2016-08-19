@@ -10,6 +10,8 @@ const ComponentBase = require('../../base/base.js');
 
 const utils = require('../../utils/utils.js');
 
+require('./layout-row.scss');
+
 const $ = ComponentBase.$;
 
 const tpl = `<div><div class="glpb-com-content clearfix"></div></div>`;

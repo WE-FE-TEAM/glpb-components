@@ -1,8 +1,8 @@
 {
   "name": "glpb-components-common",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "common utils/base component of glpb components",
-  "main": "./dist/index.js",
+  "main": "./src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "rm -rf dist && npm run assets && babel src -d dist && node-sass ./src -o dist ",
