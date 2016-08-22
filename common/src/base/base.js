@@ -62,7 +62,9 @@ $.extend( ComponentBase.prototype, {
         this.$el.css( this.style );
     },
 
-    setData : noop,
+    setData : function(data){
+        this.data = $.extend( this.data || {}, data);
+    },
 
     toJSON : function(){
         let that = this;
@@ -81,8 +83,18 @@ $.extend( ComponentBase.prototype, {
             components : subJSON
         };
     },
-    destroy : noop,
-    
+    destroy : function(){
+        if( this.$editorSettingWrap ){
+            this.$editorSettingWrap.off();
+            this.$editorSettingWrap = null;
+        }
+        if( this.$el ){
+            this.$el.off();
+            this.$el.remove();
+            this.$el = null;
+        }
+    },
+
     bindEvent : function(){
 
         //先绑定子组件的事件
@@ -112,7 +124,7 @@ $.extend( ComponentBase.prototype, {
         }).on('mouseleave', function(){
             that.$el.removeClass('glpb-editor-bar-showing');
         });
-        
+
         this.$editorSettingWrap.on('click', '.glpb-editor-op-btn-drag', function(){
             that.$editorSettingWrap.toggleClass('editor-op-show-more');
         } );
@@ -239,7 +251,7 @@ $.extend( ComponentBase.prototype, {
         }
         return this.page;
     },
-    
+
     //返回统一的组件上拖动/编辑的固定DIV容器
     $getEditSettingWrap : function(){
         let tpl = `<div class="glpb-editor-setting-wrap" data-com-id="${this.componentId}">
@@ -259,7 +271,7 @@ $.extend( ComponentBase.prototype, {
 
         return this.$editorSettingWrap;
     },
-    
+
     isEditMode : function(){
         return componentFactory.isEditMode();
     },
@@ -288,7 +300,7 @@ $.extend( ComponentBase.prototype, {
     editorGetParentId : function(){
         return this.parentId;
     },
-    
+
     //判断当前组件, 是否为 componentObj 的直接父组件
     isContainComponent : function(componentObj){
         if( componentObj ){
@@ -300,6 +312,14 @@ $.extend( ComponentBase.prototype, {
 
     editorGetDragHelper : function(){
         return `<div class="glpb-component " data-com-name="${this.componentName}" data-glpb-com-id="${this.componentId}"></div>`;
+    },
+
+    getDataType : function(){
+        return 'json';
+    },
+
+    getData : function(){
+        return this.data;
     }
 } );
 
