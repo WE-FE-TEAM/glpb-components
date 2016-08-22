@@ -20,7 +20,7 @@ const tpl = `<div><div class="glpb-carousel-inner"></div></div>`;
 
 const Carousel = ComponentBase.extend(
     {
-        componentName : 'gplb_carousel',
+        componentName : 'glpb_carousel',
         componentNameZh : '轮播图',
         componentCategory : ComponentBase.CATEGORY.UI,
         platform : ComponentBase.PLATFORM.RESPONSIVE
@@ -79,6 +79,9 @@ const Carousel = ComponentBase.extend(
             this.$el = $el;
             this.$content = $content;
 
+        },
+
+        bindComponentEvent : function(){
             this.updateSlick();
         },
 
@@ -101,17 +104,22 @@ const Carousel = ComponentBase.extend(
 
         updateSlick : function(){
             let data = this.data || {};
-            this.$content.unslick().hide();
+            try{
+                this.$content.slick('unslick').hide();
+            }catch(e){}
+
             this.updateDOM();
             let setting = data.setting || {};
-            this.$content.slick({
+            this.$content.show().slick({
                 dots: setting.dots,
                 infinite: setting.infinite,
-                speed: setting.speed
+                speed: setting.speed,
+                arrows : false
             });
         },
 
         updateDOM : function(){
+            let style = this.style;
             let data = this.data || {};
             let list = data.list || [];
             let html = '';
@@ -119,9 +127,9 @@ const Carousel = ComponentBase.extend(
                 let obj = list[i];
                 let href = obj.href;
                 if( href ){
-                    html += `<div class="glpb-carousel-item"><a href="${href}"><img src="${obj.imageURL}" /></a></div>`;
+                    html += `<div style="width:${style.width};height:${style.height};" class="glpb-carousel-item"><a href="${href}"><img src="${obj.imageURL}" /></a></div>`;
                 }else{
-                    html += `<div class="glpb-carousel-item"><img src="${obj.imageURL}" /></div>`;
+                    html += `<div style="width:${style.width};height:${style.height};" class="glpb-carousel-item"><img src="${obj.imageURL}" /></div>`;
                 }
             }
 
@@ -129,7 +137,7 @@ const Carousel = ComponentBase.extend(
         },
         
         destroy : function(){
-            this.$content.unslick();
+            this.$content.slick('unslick');
             this.data = null;
             this.$content.off();
             ComponentBase.prototype.destroy.call( this );
