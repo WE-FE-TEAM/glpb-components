@@ -54,7 +54,7 @@ $.extend( ComponentBase.prototype, {
     afterRender : noop,
 
     getStyle : function(){
-        return this.style;
+        return $.extend({}, this.style);
     },
 
     setStyle : function( style ){
@@ -319,7 +319,7 @@ $.extend( ComponentBase.prototype, {
     },
 
     getData : function(){
-        return this.data;
+        return $.extend( {}, this.data, true);
     }
 } );
 

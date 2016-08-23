@@ -63,6 +63,15 @@ const ImageView = ComponentBase.extend(
             $el.append($editorSettingWrap);
         },
 
+        setStyle : function(newStyle){
+            ComponentBase.prototype.setStyle.call( this, newStyle);
+            let style = this.style;
+            this.$content.css({
+                width : style.width,
+                height : style.height
+            });
+        },
+
         setData : function(data){
             this.data = $.extend( this.data, data );
             this.updateImage();
@@ -70,7 +79,14 @@ const ImageView = ComponentBase.extend(
 
         updateImage : function(){
             let data = this.data;
-            this.$content.attr('src', data.imageURL).attr('title', data.title).attr('alt', data.alt);
+            let style = this.style;
+            this.$content.attr('src', data.imageURL)
+                .attr('title', data.title)
+                .attr('alt', data.alt)
+                .css({
+                    width : style.width,
+                    height : style.height
+                });
         }
     }
 );

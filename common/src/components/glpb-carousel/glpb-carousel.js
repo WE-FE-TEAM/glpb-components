@@ -92,9 +92,15 @@ const Carousel = ComponentBase.extend(
             $el.append($editorSettingWrap);
         },
 
-        setStyle : function( style ){
-            this.style = $.extend( this.style, style );
+        setStyle : function( newStyle ){
+            let lastStyle = this.style;
+            this.style = $.extend( {}, this.style, newStyle );
             this.$el.css( this.style );
+
+            let style = this.style;
+            if( lastStyle.width !== style.width || lastStyle.height !== style.height ){
+                this.updateSlick();
+            }
         },
 
         setData : function(data){
