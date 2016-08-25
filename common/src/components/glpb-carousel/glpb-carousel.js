@@ -94,7 +94,7 @@ const Carousel = ComponentBase.extend(
 
         setStyle : function( newStyle ){
             let lastStyle = this.style;
-            this.style = $.extend( {}, this.style, newStyle );
+            this.style = $.extend( this.style, newStyle );
             this.$el.css( this.style );
 
             let style = this.style;

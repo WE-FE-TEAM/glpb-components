@@ -21,7 +21,7 @@ const LayoutRow = ComponentBase.extend(
         componentName : 'layout_row',
         componentNameZh : '独占行',
         componentCategory : ComponentBase.CATEGORY.BASE,
-        platform : ComponentBase.PLATFORM.PC
+        platform : ComponentBase.PLATFORM.RESPONSIVE
     }, 
     {
         getDefaultStyle : function(){
