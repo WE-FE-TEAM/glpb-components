@@ -18,7 +18,7 @@ const tpl = `<div><img /></div>`;
 
 const ImageView = ComponentBase.extend(
     {
-        componentName : 'gplb_image',
+        componentName : 'glpb_image',
         componentNameZh : '单个图片',
         componentCategory : ComponentBase.CATEGORY.UI,
         platform : ComponentBase.PLATFORM.RESPONSIVE

@@ -26,7 +26,7 @@ const LayoutColumn = ComponentBase.extend(
     {
         getDefaultStyle : function(){
             return {
-                width : '360px',
+                width : '100%',
                 height : '360px',
                 background : 'transparent',
                 margin : '0px 0px'
@@ -69,7 +69,7 @@ const LayoutColumn = ComponentBase.extend(
             ComponentBase.prototype.bindEditorEvent.call( this );
             this.$content.droppable({
                 // accept : '.lpb-component',
-                accept : '[data-com-name]',
+                accept : '[data-com-name]:not([data-com-name=layout_column])',
                 greedy : true,
                 classes: {
                     "ui-droppable-active": "custom-state-active",

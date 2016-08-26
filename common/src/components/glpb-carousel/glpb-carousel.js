@@ -29,7 +29,7 @@ const Carousel = ComponentBase.extend(
         getDefaultStyle : function(){
             return {
                 height : '200px',
-                width : '360px',
+                width : '100%',
                 margin : '0 auto'
             };
         },
