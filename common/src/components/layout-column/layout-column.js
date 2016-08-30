@@ -45,6 +45,7 @@ const LayoutColumn = ComponentBase.extend(
             this.$el = $el;
             this.$content = $content;
             let components = this.components || [];
+            let componentRefs = this.componentRefs;
             for( var i = 0, len = components.length; i < len; i++ ){
                 let config = components[i];
                 config.parentId = currentComponentId;
@@ -52,7 +53,8 @@ const LayoutColumn = ComponentBase.extend(
                 if( com ){
 
                     com.render();
-                    $el.append( com.$getElement() );
+                    $content.append( com.$getElement() );
+                    componentRefs.push( com );
                 }else{
                     //不存在该组件
                     throw new Error(`componentName[${config.componentName}]对应的组件不存在!!`);
@@ -120,7 +122,7 @@ const LayoutColumn = ComponentBase.extend(
                 instance.render();
                 this.$content.append( instance.$getElement() );
                 instance.bindEvent();
-                this.components.push( instance.toJSON() );
+                this.componentRefs.push( instance );
             }else{
                 throw new Error(`componentName[${componentName}]对应的组件不存在!!`);
             }
@@ -142,7 +144,7 @@ const LayoutColumn = ComponentBase.extend(
                 }
                 let oldParentComponent = component.getParentComponent();
                 oldParentComponent.editorRemoveComponent(componentId);
-                this.components.push( component.toJSON() );
+                this.componentRefs.push( component );
                 this.$content.append( component.$getElement() );
             }
         },

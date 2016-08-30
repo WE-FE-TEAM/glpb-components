@@ -31,6 +31,9 @@ function ComponentBase( args ){
     this.data = $.extend( this.getDefaultData(), args.data );
     this.components = args.components || this.getDefaultComponents();
 
+    //当前组件实时含有的所有子组件引用数组
+    this.componentRefs = [];
+
     //将当前实例对象, 注册到全局
     componentFactory.addComponentInstance(this.componentId, this);
 
@@ -68,10 +71,8 @@ $.extend( ComponentBase.prototype, {
 
     toJSON : function(){
         let that = this;
-        let sub = this.components || [];
-        let subJSON = sub.map( function(conf){
-            let id = conf.componentId;
-            let com = componentFactory.getComponentById(id);
+        let sub = this.componentRefs || [];
+        let subJSON = sub.map( function(com){
             return com.toJSON();
         } );
         return {
@@ -98,10 +99,9 @@ $.extend( ComponentBase.prototype, {
     bindEvent : function(){
 
         //先绑定子组件的事件
-        let components = this.components || [];
+        let components = this.componentRefs || [];
         for( var i = 0, len = components.length; i < len; i++ ){
-            let componentId = components[i].componentId;
-            let component = componentFactory.getComponentById(componentId);
+            let component = components[i];
             try{
                 component.bindEvent();
             }catch(e){
@@ -174,13 +174,13 @@ $.extend( ComponentBase.prototype, {
             console.warn(`子组件移动方向值[${direction}]非法!!只能是 up/down/left/right 之一`);
             return -1;
         }
-        let components = this.components || [];
+        let components = this.componentRefs || [];
         let oldIndex = -1;
         let childConf = null;
         let len = components.length;
         for( var i = 0; i < len; i++ ){
             let temp = components[i];
-            if( temp.componentId === componentId ){
+            if( temp.getComponentId() === componentId ){
                 oldIndex = i;
                 childConf = temp;
                 break;
@@ -285,10 +285,10 @@ $.extend( ComponentBase.prototype, {
 
     //从当前组件中删除指定ID的组件, **不** 进行DOM操作
     editorRemoveComponent : function(componentId){
-        let components = this.components || [];
+        let components = this.componentRefs || [];
         for( var i = 0, len = components.length; i < len; i++ ){
             let conf = components[i];
-            if( conf.componentId === componentId ){
+            if( conf.getComponentId() === componentId ){
                 components.splice(i, 1);
                 return true;
             }
