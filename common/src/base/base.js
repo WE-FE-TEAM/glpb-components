@@ -62,7 +62,17 @@ $.extend( ComponentBase.prototype, {
 
     setStyle : function( style ){
         this.style = $.extend( this.style, style );
-        this.$el.css( this.style );
+        let cssStyle = utils.translateComponentStyle( this.style );
+        this.updateCSSStyle( cssStyle );
+    },
+
+    //将组件的 style 转换成 浏览器原生支持的样式
+    translateStyle : function( style ){
+        return utils.translateComponentStyle( style );
+    },
+
+    updateCSSStyle : function( cssStyle ){
+        this.$el.css( cssStyle );
     },
 
     setData : function(data){

@@ -95,10 +95,13 @@ const Carousel = ComponentBase.extend(
         setStyle : function( newStyle ){
             let lastStyle = this.style;
             this.style = $.extend( {}, this.style, newStyle );
-            this.$el.css( this.style );
 
-            let style = this.style;
-            if( lastStyle.width !== style.width || lastStyle.height !== style.height ){
+            let lastCssStyle = this.translateStyle( lastStyle );
+            let newCssStyle = this.translateStyle( newStyle );
+
+            this.$el.css( newCssStyle );
+            
+            if( lastCssStyle.width !== newCssStyle.width || lastCssStyle.height !== newCssStyle.height ){
                 this.updateSlick();
             }
         },

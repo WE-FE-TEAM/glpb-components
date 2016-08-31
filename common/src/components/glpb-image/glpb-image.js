@@ -48,7 +48,8 @@ const ImageView = ComponentBase.extend(
             let data = this.data;
 
             let cssClass = this.getBaseCssClass() + '  ';
-            let $el = $(tpl).addClass( cssClass ).css( this.style );
+            let cssStyle = this.translateStyle( this.style );
+            let $el = $(tpl).addClass( cssClass ).css( cssStyle );
             let $content = $('img', $el);
             this.$el = $el;
             this.$content = $content;
@@ -63,9 +64,8 @@ const ImageView = ComponentBase.extend(
             $el.append($editorSettingWrap);
         },
 
-        setStyle : function(newStyle){
-            ComponentBase.prototype.setStyle.call( this, newStyle);
-            let style = this.style;
+        updateCSSStyle : function(style){
+
             this.$content.css({
                 width : style.width,
                 height : style.height
@@ -79,7 +79,7 @@ const ImageView = ComponentBase.extend(
 
         updateImage : function(){
             let data = this.data;
-            let style = this.style;
+            let style = this.translateStyle( this.style );
             this.$content.attr('src', data.imageURL)
                 .attr('title', data.title)
                 .attr('alt', data.alt)

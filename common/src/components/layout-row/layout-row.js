@@ -28,7 +28,7 @@ const LayoutRow = ComponentBase.extend(
             return {
                 height : 'auto',
                 width : 'auto',
-                background : 'transparent',
+                background : {},
                 margin : '0 auto 10px'
             };
         },
@@ -48,7 +48,8 @@ const LayoutRow = ComponentBase.extend(
             let currentComponentId = this.componentId;
 
             let cssClass = this.getBaseCssClass() + '  ';
-            let $el = $(tpl).addClass( cssClass ).css( this.style );
+            let cssStyle = this.translateStyle( this.style );
+            let $el = $(tpl).addClass( cssClass ).css( cssStyle );
             let $content = $('.glpb-com-content', $el);
             this.$el = $el;
             this.$content = $content;

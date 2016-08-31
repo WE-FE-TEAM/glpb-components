@@ -28,7 +28,7 @@ const LayoutColumn = ComponentBase.extend(
             return {
                 width : '100%',
                 height : '360px',
-                background : 'transparent',
+                background : {},
                 margin : '0px 0px'
             };
         },
@@ -40,7 +40,8 @@ const LayoutColumn = ComponentBase.extend(
             let currentComponentId = this.componentId;
             
             let cssClass = this.getBaseCssClass() + ' ';
-            let $el = $(tpl).addClass( cssClass ).css( this.style );
+            let cssStyle = this.translateStyle( this.style );
+            let $el = $(tpl).addClass( cssClass ).css( cssStyle );
             let $content = $('.glpb-com-content', $el);
             this.$el = $el;
             this.$content = $content;
@@ -61,10 +62,6 @@ const LayoutColumn = ComponentBase.extend(
                 }
             }
             return $el;
-        },
-        setStyle : function( style ){
-            this.style = $.extend( this.style, style );
-            this.$el.css( this.style );
         },
         bindEditorEvent : function(){
             let that = this;
