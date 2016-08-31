@@ -29,6 +29,7 @@ const LayoutColumn = ComponentBase.extend(
                 width : '100%',
                 height : '360px',
                 background : {},
+                padding : '0',
                 margin : '0px 0px'
             };
         },

@@ -29,6 +29,7 @@ const LayoutRow = ComponentBase.extend(
                 height : 'auto',
                 width : 'auto',
                 background : {},
+                padding : '0',
                 margin : '0 auto 10px'
             };
         },
