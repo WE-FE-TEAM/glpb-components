@@ -77,6 +77,14 @@ singleton.addComponentInstance = function(componentId, instance){
 };
 
 /**
+ * 清除当前页面中的组件实例引用
+ * @param componentId {string} 组件ID
+ */
+singleton.removeComponentInstance = function(componentId){
+    delete pageComponentMap[componentId];
+};
+
+/**
  * 获取当前页面上,已经注册过的组件实例
  * @param componentId {string} 组件ID
  * @returns {*}

@@ -87,6 +87,10 @@ const ImageView = ComponentBase.extend(
                     width : style.width,
                     height : style.height
                 });
+        },
+
+        componentWillUnmount : function(){
+            this.$content = null;
         }
     }
 );

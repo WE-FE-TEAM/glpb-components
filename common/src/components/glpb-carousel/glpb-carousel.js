@@ -144,12 +144,11 @@ const Carousel = ComponentBase.extend(
 
             this.$content.html( html );
         },
-        
-        destroy : function(){
+
+        componentWillUnmount : function(){
             this.$content.slick('unslick');
-            this.data = null;
             this.$content.off();
-            ComponentBase.prototype.destroy.call( this );
+            this.$content = null;
         }
     }
 );

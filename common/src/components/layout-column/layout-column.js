@@ -152,6 +152,11 @@ const LayoutColumn = ComponentBase.extend(
                 let $child = this.page.getComponentById(componentId).$getElement();
                 utils.moveChildInParent($child, this.$content, newIndex);
             }
+        },
+
+        componentWillUnmount : function(){
+            this.$content.droppable('destroy');
+            this.$content = null;
         }
     }
 );

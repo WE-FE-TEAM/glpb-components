@@ -26,6 +26,9 @@ function ComponentBase( args ){
     this.componentId = args.componentId;
     //当前组件名
     this.componentName = this.constructor.componentName;
+    //当前组件实例的名字
+    this.instanceName = args.instanceName || this.constructor.componentNameZh || this.componentName;
+
     this.$el = null;
     this.style = $.extend( this.getDefaultStyle(), args.style );
     this.data = $.extend( this.getDefaultData(), args.data );
@@ -55,6 +58,17 @@ $.extend( ComponentBase.prototype, {
     },
 
     afterRender : noop,
+    
+    setInstanceName : function( name ){
+        name = ( name || '' ).trim();
+        if( name ){
+            this.instanceName = name;
+        }
+    },
+
+    getInstanceName : function(){
+        return this.instanceName;
+    },
 
     getStyle : function(){
         return $.extend({}, this.style);
@@ -87,6 +101,7 @@ $.extend( ComponentBase.prototype, {
         } );
         return {
             componentName : this.componentName,
+            instanceName : this.instanceName,
             componentId : this.componentId,
             parentId : this.parentId,
             style : this.style,
@@ -94,17 +109,66 @@ $.extend( ComponentBase.prototype, {
             components : subJSON
         };
     },
+
+    //只返回子孙组件的ID及名字, 用于在页面上显示所有组件的tree结构
+    toSimpleJSON : function(){
+        let sub = this.componentRefs || [];
+        let subJSON = sub.map( function(com){
+            return com.toSimpleJSON();
+        } );
+        return {
+            name : this.instanceName,
+            id : this.componentId,
+            children : subJSON
+        };
+    },
+    
+    onBeforeDestroy : function(){
+        this.page.beforeComponentDestroy( this );
+    },
+    
     destroy : function(){
+        
+        //开始销毁前的回调
+        this.onBeforeDestroy();
+        
+        //如果包含子组件, 先执行所有子组件的destroy
+        let sub = this.componentRefs || [];
+        for( let i = 0, len = sub.length; i < len; i++ ){
+            let subComponent = sub[i];
+            try{
+                subComponent.destroy();
+            }catch(e){
+                console.warn(`执行子组件的destroy异常:`, e);
+            }
+        }
+        
+        //取消通用操作栏事件
         if( this.$editorSettingWrap ){
             this.$editorSettingWrap.off();
-            this.$editorSettingWrap = null;
         }
+        
+        //执行组件自定义的销毁操作
+        this.componentWillUnmount();
+        
+        //从全局组件实例中删除引用
+        componentFactory.removeComponentInstance( this.componentId );
+        
+        //清除DOM
         if( this.$el ){
             this.$el.off();
+            this.$el.draggable('destroy');
             this.$el.remove();
-            this.$el = null;
         }
+
+        this.components = null;
+        this.componentRefs = null;
+        this.page = null;
+        this.$editorSettingWrap = null;
+        this.$el = null;
     },
+    //子类是重写, 销毁子类中特有的一些事件绑定等
+    componentWillUnmount : noop,
 
     bindEvent : function(){
 
@@ -151,6 +215,11 @@ $.extend( ComponentBase.prototype, {
             that.enterEdit();
         } );
 
+        //删除当前组件及子孙组件
+        this.$editorSettingWrap.on('click', '.glpb-editor-op-btn-delete', function(){
+            that.triggerDestroy();
+        } );
+
         this.$el.draggable({
             handle: "> .glpb-editor-setting-wrap .glpb-editor-op-btn-drag",
             revert : 'invalid',
@@ -163,6 +232,12 @@ $.extend( ComponentBase.prototype, {
 
     enterEdit : function(){
         this.page.editComponent(this.componentId);
+    },
+
+    triggerDestroy : function(){
+        if( window.confirm(`是否确定删除组件??\n\n一旦删除, 不能回退, 请务必慎重!!!`)){
+            this.page.destroyComponentById( this.componentId );
+        }
     },
 
     //显示正在编辑中的状态
@@ -274,6 +349,7 @@ $.extend( ComponentBase.prototype, {
             <div class="glpb-editor-op-btn glpb-editor-op-btn-move" data-direction="left"  title="向左移动"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></div>
             <div class="glpb-editor-op-btn glpb-editor-op-btn-move" data-direction="right"  title="向右移动"><i class="fa fa-arrow-circle-right" aria-hidden="true"></i></div>
             <div class="glpb-editor-op-btn glpb-editor-op-btn-edit" title="编辑"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></div>
+            <div class="glpb-editor-op-btn glpb-editor-op-btn-delete" title="!!删除!!"><i class="fa fa-trash" aria-hidden="true"></i></div>
         </div>
     </div>
 </div>`;
