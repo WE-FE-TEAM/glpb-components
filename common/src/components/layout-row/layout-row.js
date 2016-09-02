@@ -88,6 +88,8 @@ const LayoutRow = ComponentBase.extend(
             component.bindEvent();
 
             this.componentRefs.push( component );
+            
+            this.afterChildChange();
 
         },
 
@@ -104,6 +106,8 @@ const LayoutRow = ComponentBase.extend(
                 this.componentRefs.push( component );
                 this.$content.append( component.$getElement() );
             }
+            
+            this.afterChildChange();
 
         },
 
@@ -141,16 +145,22 @@ const LayoutRow = ComponentBase.extend(
 
         },
 
-        editorRemoveComponent : function(componentId){
-            ComponentBase.prototype.editorRemoveComponent.call( this, componentId );
-            // this.resize();
-        },
         editorHandleChildMove : function(componentId, direction){
             let newIndex = ComponentBase.prototype.editorHandleChildMove.call( this, componentId, direction);
             if( newIndex >= 0 ){
                 let $child = this.page.getComponentById(componentId).$getElement();
                 utils.moveChildInParent($child, this.$content, newIndex);
             }
+            
+        },
+
+        canAcceptChildComponentName : function(componentName){
+            return [ 'layout_column' ].indexOf(componentName) >= 0;
+        },
+
+        insertChildDOM : function(component, index){
+            let $componentEl = component.$getElement();
+            utils.insertElement( $componentEl, this.$content, index );
         },
 
         componentWillUnmount : function(){

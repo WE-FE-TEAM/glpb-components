@@ -13,6 +13,9 @@ const componentFactory = require('../component-factory/component-factory.js');
 
 require('./base.scss');
 
+//实例化的个数
+let instanceNum = 1;
+
 function noop(){}
 
 function ComponentBase( args ){
@@ -27,7 +30,7 @@ function ComponentBase( args ){
     //当前组件名
     this.componentName = this.constructor.componentName;
     //当前组件实例的名字
-    this.instanceName = args.instanceName || this.constructor.componentNameZh || this.componentName;
+    this.instanceName = args.instanceName || ( ( this.constructor.componentNameZh || this.componentName ) + instanceNum++ );
 
     this.$el = null;
     this.style = $.extend( this.getDefaultStyle(), args.style );
@@ -58,7 +61,7 @@ $.extend( ComponentBase.prototype, {
     },
 
     afterRender : noop,
-    
+
     setInstanceName : function( name ){
         name = ( name || '' ).trim();
         if( name ){
@@ -157,7 +160,7 @@ $.extend( ComponentBase.prototype, {
         //清除DOM
         if( this.$el ){
             this.$el.off();
-            this.$el.draggable('destroy');
+            // this.$el.draggable('destroy');
             this.$el.remove();
         }
 
@@ -220,14 +223,14 @@ $.extend( ComponentBase.prototype, {
             that.triggerDestroy();
         } );
 
-        this.$el.draggable({
-            handle: "> .glpb-editor-setting-wrap .glpb-editor-op-btn-drag",
-            revert : 'invalid',
-            helper: function(){
-                return that.editorGetDragHelper();
-            },
-            appendTo: "body"
-        });
+        // this.$el.draggable({
+        //     handle: "> .glpb-editor-setting-wrap .glpb-editor-op-btn-drag",
+        //     revert : 'invalid',
+        //     helper: function(){
+        //         return that.editorGetDragHelper();
+        //     },
+        //     appendTo: "body"
+        // });
     },
 
     enterEdit : function(){
@@ -235,9 +238,7 @@ $.extend( ComponentBase.prototype, {
     },
 
     triggerDestroy : function(){
-        if( window.confirm(`是否确定删除组件??\n\n一旦删除, 不能回退, 请务必慎重!!!`)){
-            this.page.destroyComponentById( this.componentId );
-        }
+        this.page.destroyComponentById( this.componentId );
     },
 
     //显示正在编辑中的状态
@@ -300,6 +301,10 @@ $.extend( ComponentBase.prototype, {
         components.splice(oldIndex, 1);
         //插入到新位置
         components.splice(newIndex, 0, childConf);
+
+        //通知builder, 当前组件内部结构发生变化
+        this.afterChildChange();
+
         return newIndex;
     },
 
@@ -371,21 +376,32 @@ $.extend( ComponentBase.prototype, {
 
     //从当前组件中删除指定ID的组件, **不** 进行DOM操作
     editorRemoveComponent : function(componentId){
+        let isSuccess = false;
         let components = this.componentRefs || [];
         for( var i = 0, len = components.length; i < len; i++ ){
             let conf = components[i];
             if( conf.getComponentId() === componentId ){
                 components.splice(i, 1);
-                return true;
+                isSuccess = true;
+                break;
             }
         }
-        console.warn(`(editorRemoveComponent) : 组件[${this.componentId}]不包含子组件${componentId}`);
-        return false;
+        if( isSuccess ){
+            this.afterChildChange();
+        }else{
+            console.warn(`(editorRemoveComponent) : 组件[${this.componentId}]不包含子组件${componentId}`);
+        }
+
+        return isSuccess;
     },
 
     //返回当前组件的父组件ID
     editorGetParentId : function(){
         return this.parentId;
+    },
+    
+    editorSetParentId : function(parentId){
+        this.parentId = parentId;
     },
 
     //判断当前组件, 是否为 componentObj 的直接父组件
@@ -407,7 +423,48 @@ $.extend( ComponentBase.prototype, {
 
     getData : function(){
         return $.extend( {}, this.data, true);
-    }
+    },
+
+    //容器类型组件, 子组件增加/排序/删除 等操作时, 触发的回调, 通知builder
+    afterChildChange : function(){
+        this.page.afterComponentChildChange( this );
+    },
+
+    /**
+     * 当前组件是否内部能包含对应类型的子组件
+     * @param componentName {string} 组件类型
+     * @returns {boolean}
+     */
+    canAcceptChildComponentName : function(componentName){
+        return false;
+    },
+
+    /**
+     * 在子组件数组的 index 位置上, 插入新的组件, **不进行** DOM操作
+     * @param component {object} 组件实例引用
+     * @param index {int} 要插入的位置
+     */
+    insertChildAtIndex : function(component, index){
+        
+        let componentRefs = this.componentRefs;
+
+        //将组件从原来的父组件中删除
+        let oldParent = component.getParentComponent();
+        oldParent.editorRemoveComponent( component.getComponentId() );
+        
+        //修改组件的 parentId
+        component.editorSetParentId( this.componentId );
+        
+        index = Math.min( componentRefs.length, index );
+        this.componentRefs.splice(index, 0, component);
+
+        this.insertChildDOM(component, index);
+
+        this.afterChildChange();
+    },
+
+    //子类中覆盖, 实际实行插入子组件的DOM操作
+    insertChildDOM : function(component, index){}
 } );
 
 //组件类型

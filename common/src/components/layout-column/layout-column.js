@@ -124,6 +124,8 @@ const LayoutColumn = ComponentBase.extend(
             }else{
                 throw new Error(`componentName[${componentName}]对应的组件不存在!!`);
             }
+
+            this.afterChildChange();
         },
         
         //要添加的组件实例,已经存在!
@@ -144,6 +146,8 @@ const LayoutColumn = ComponentBase.extend(
                 oldParentComponent.editorRemoveComponent(componentId);
                 this.componentRefs.push( component );
                 this.$content.append( component.$getElement() );
+
+                this.afterChildChange();
             }
         },
         editorHandleChildMove : function(componentId, direction){
@@ -152,6 +156,15 @@ const LayoutColumn = ComponentBase.extend(
                 let $child = this.page.getComponentById(componentId).$getElement();
                 utils.moveChildInParent($child, this.$content, newIndex);
             }
+        },
+
+        canAcceptChildComponentName : function(componentName){
+            return [ 'layout_column' ].indexOf(componentName) < 0;
+        },
+
+        insertChildDOM : function(component, index){
+            let $componentEl = component.$getElement();
+            utils.insertElement( $componentEl, this.$content, index );
         },
 
         componentWillUnmount : function(){

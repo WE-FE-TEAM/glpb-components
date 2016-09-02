@@ -39,6 +39,22 @@ singleton.moveChildInParent = function($child, $parent, newIndex){
 };
 
 /**
+ * 将 $child 对应的DOM插入到 $parent 的 index 位置上
+ * @param $child {object} 要插入的DOM的 jquery 对象
+ * @param $parent {object} 容器DOM的 jquery 对象
+ * @param index {int} 要插入到的位置上
+ */
+singleton.insertElement = function($child, $parent, index){
+    let targetSibling = $parent.children()[index];
+    if( targetSibling ){
+        $child.insertBefore(targetSibling);
+    }else{
+        //将新插入的组件追加到最后
+        $parent.append( $child );
+    }
+};
+
+/**
  * 系统中, 每个组件的 style, 并不能直接设置给DOM元素, 需要经过转换
  * 本函数将系统中的 style 写法, 转换成 DOM 原生识别的样式
  * @param style {object} 系统中的组件style, 并 **不是** 浏览器原生支持的CSS样式
