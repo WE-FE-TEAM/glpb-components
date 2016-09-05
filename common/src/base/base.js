@@ -501,6 +501,7 @@ ComponentBase.extend = function( statics, prototype){
     function Component(){
         ComponentBase.apply( this, [].slice.call(arguments) );
     }
+    
     $.extend( Component, statics);
     function parent(){}
     parent.prototype = ComponentBase.prototype;

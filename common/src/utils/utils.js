@@ -45,6 +45,10 @@ singleton.moveChildInParent = function($child, $parent, newIndex){
  * @param index {int} 要插入到的位置上
  */
 singleton.insertElement = function($child, $parent, index){
+
+    //因为要插入的 index, 是基于 child 不存在的DOM中的情况下算出来的, 为了解决child本来就在parent中的情况, 先把child从DOM中移出
+    $child.detach();
+
     let targetSibling = $parent.children()[index];
     if( targetSibling ){
         $child.insertBefore(targetSibling);
