@@ -99,3 +99,12 @@ singleton.translateComponentStyle = function( style ){
 
     return realStyle;
 };
+
+let querySignIndex = 0;
+/**
+ * 简单的生成当前页面上惟一ID, 一般用在Ajax请求中, 标记某个请求的ID
+ * @returns {string} {string}
+ */
+singleton.generateQuerySign = function(){
+    return ( new Date() ).getTime() + '' + querySignIndex++;
+};

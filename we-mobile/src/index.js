@@ -7,11 +7,14 @@
 
 const glpbCommon = require('glpb-components-common');
 
+const ExchangeItemList = require('./components/exchange-item-list/exchange-item-list.js');
+
 const BaseComponent = glpbCommon.BaseComponent;
-const Image = require('./components/glpb-image/glpb-image.js');
-const Carousel = require('./components/glpb-carousel/glpb-carousel.js');
+
+
 
 
 
 module.exports = {
+    ExchangeItemList
 };

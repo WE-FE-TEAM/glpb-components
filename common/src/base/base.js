@@ -464,7 +464,21 @@ $.extend( ComponentBase.prototype, {
     },
 
     //子类中覆盖, 实际实行插入子组件的DOM操作
-    insertChildDOM : function(component, index){}
+    insertChildDOM : function(component, index){},
+
+    hide : function(){
+        if( this.$el ){
+            this.$el.hide();
+        }
+        return this;
+    },
+    
+    show : function(){
+        if( this.$el ){
+            this.$el.show();
+        }
+        return this;
+    }
 } );
 
 //组件类型
