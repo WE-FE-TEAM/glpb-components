@@ -10,6 +10,8 @@ const glpbCommon = require('glpb-components-common');
 
 const serviceFactory = require('../../service/service-factory.js');
 
+const bridgeXXX = require('../../bridgeXXX/bridgeXXX.js');
+
 require('./exchange-item-list.scss');
 
 const BaseComponent = glpbCommon.BaseComponent;
@@ -22,6 +24,8 @@ const exchangeService = serviceFactory.getService('exchange');
 
 
 const tpl = `<div><ul class="glpb-exchange-list"></ul></div>`;
+
+const editorPlaceHolderImage = '//m.we.com/cms/577cdedf61e15053267301af/glpb-we/exchange-list-item.png';
 
 const ExchangeItemList = BaseComponent.extend(
     {
@@ -65,7 +69,10 @@ const ExchangeItemList = BaseComponent.extend(
             this.$el = $el;
             this.$content = $content;
 
-            
+            if( this.isEditMode() ){
+                //编辑模式, 显示一个图片占位
+                $(`<img class="editor-place-holder-img" src="${editorPlaceHolderImage}" title="交易所资产列表占位图片(非真实数据)" />`).appendTo( $content );
+            }
         },
 
         updateCSSStyle : function(style){
@@ -117,7 +124,7 @@ const ExchangeItemList = BaseComponent.extend(
          * @param exchangeId {string} 交易所ID
          */
         openExchangeDetail : function(exchangeId){
-            
+            bridgeXXX.showExchangeDetailPage( exchangeId );
         },
         
         setListDetailData : function( list ){
@@ -140,8 +147,29 @@ const ExchangeItemList = BaseComponent.extend(
         },
 
         _renderExchangeItem : function( obj ){
-            return `<li class="glpb-exchange-list-item" data-exchange-id="${obj.id}">
-                        
+
+            let nameEscaped = utils.escapeHTML( obj.productName );
+            let sourceEscaped = utils.escapeHTML( obj.projectSource );
+
+            return `<li class="glpb-exchange-list-item" data-exchange-id="${obj.productNo}">
+                        <h2 class="exchange-item-title">${nameEscaped}</h2>
+                        <div class="exchange-item-info-main clearfix">
+                            <div class="info-box year-rate-box">
+                                <div class="product-year-rate highlight"><span class="num-family">${obj.annualRate}</span>%</div>
+                                <div class="info">预期年收益</div>
+                            </div>
+                            <div class="info-box product-period-box">
+                                <div class="product-period"><span class="num-family">${obj.productPeriod}</span>天</div>
+                                <div class="info">期限</div>
+                            </div>
+                            <div class="info-box product-status-box">
+                                <div class="buy-btn">抢购</div>
+                            </div>
+                        </div>
+                        <div class="exchange-item-info-footer">
+                            <span class="start-amount">${obj.startAmount}元起</span>
+                            <span class="project-source">${sourceEscaped}</span>
+                        </div>
                 </li>`;
         }
     }

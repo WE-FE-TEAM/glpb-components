@@ -217,6 +217,15 @@ var bridgeXXX = {
         } catch (_error) {
             console.log(_error);
         }
+    },
+
+    /**
+     * 打开APP的交易所详情页
+     * @param productId {string} 交易所资产ID
+     */
+    showExchangeDetailPage : function( productId ){
+        let url = 'renrendaiInvestment://app.we.com/exchange/detail?productNo=' + encodeURIComponent( productId );
+        location.href = url;
     }
 
 };

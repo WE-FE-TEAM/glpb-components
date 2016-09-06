@@ -1,0 +1,127 @@
+
+
+.glpb-com-glpb_we_com_exchange_item_list{
+
+
+  $highlight-color: #ff7422;
+
+  background: #e8eaec;
+
+  .glpb-exchange-list{
+
+  }
+
+  .glpb-exchange-list-item{
+
+    padding: 0 0.3rem;
+    margin-bottom: 0.1rem;
+    text-align: left;
+    color: #828282;
+    background: #fff;
+
+    //交易所标题区域
+    .exchange-item-title{
+
+      $height: 0.66rem;
+
+      height: $height;
+      line-height: $height;
+      font-size: 0.26rem;
+      white-space:nowrap;
+      overflow: hidden;
+      -ms-text-overflow: ellipsis;
+      text-overflow: ellipsis;
+    }
+
+    .exchange-item-info-main{
+
+      height: 1.35rem;
+      border-bottom:1px solid #e5e5e5;
+      text-align: center;
+
+      .info-box{
+        float: left;
+        padding-top: 0.13rem;
+        width: 33%;
+      }
+
+      .info{
+        font-size: 0.22rem;
+        line-height: 0.22rem;
+        color: #828282;
+      }
+
+      .year-rate-box{
+
+        .product-year-rate{
+          font-size: 0.26rem;
+          color: $highlight-color;
+
+          .num-family{
+            font-size: 0.48rem;
+          }
+        }
+      }
+
+      //投资期限
+      .product-period-box{
+
+        .product-period{
+          font-size: 0.22rem;
+          color: #404040;
+
+          .num-family{
+            font-size: 0.48rem;
+          }
+        }
+      }
+
+      .buy-btn{
+        float: right;
+        width: 1.56rem;
+        height: 0.56rem;
+        line-height: 0.52rem;
+        margin-top: 0.05rem;
+        font-size: 0.26rem;
+        text-align: center;
+        color: $highlight-color;
+        border: 2px solid $highlight-color;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+        -webkit-border-radius:3px;
+        border-radius:3px;
+      }
+
+    }
+
+    //底部
+    .exchange-item-info-footer{
+      $footer-height: 1rem;
+
+      height: $footer-height;
+      line-height: $footer-height;
+      font-size: 0.22rem;
+
+      .start-amount{
+        padding-left: 0.3rem;
+        font-size: .22rem;
+        background: url(./assets/rmb-icon.png?__inline) scroll no-repeat 0 center;
+        background-size: 0.2rem 0.2rem;
+      }
+
+      .project-source{
+        float: right;
+      }
+    }
+  }
+
+  //编辑模式的占位图片
+  .editor-place-holder-img{
+    border:0 none;
+    display: block;
+    width: 7.5rem;
+    height: 3rem;
+  }
+
+}

@@ -7,6 +7,8 @@
 
 const glpbCommon = require('glpb-components-common');
 
+const bridgeXXX = require('./bridgeXXX/bridgeXXX.js');
+
 const ExchangeItemList = require('./components/exchange-item-list/exchange-item-list.js');
 
 const BaseComponent = glpbCommon.BaseComponent;
@@ -16,5 +18,6 @@ const BaseComponent = glpbCommon.BaseComponent;
 
 
 module.exports = {
+    bridgeXXX,
     ExchangeItemList
 };

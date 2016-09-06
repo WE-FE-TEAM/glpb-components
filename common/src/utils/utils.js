@@ -108,3 +108,17 @@ let querySignIndex = 0;
 singleton.generateQuerySign = function(){
     return ( new Date() ).getTime() + '' + querySignIndex++;
 };
+
+/**
+ * 将字符串中包含的HTML特殊字符,转换成实体, 避免注入
+ * @param str {string} 可能包含HTML标签的字符串
+ * @returns {string} 将HTML标签转换成实体之后的字符串
+ */
+singleton.escapeHTML = function( str ){
+    str = str || '';
+    return str.replace(/&/g, '&amp;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;');
+};
