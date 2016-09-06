@@ -37,7 +37,11 @@ const ExchangeItemList = BaseComponent.extend(
     {
         getDefaultStyle : function(){
             return {
-
+                background : {
+                    backgroundColor : '#e8eaec'
+                },
+                padding : '0',
+                margin : '0'
             };
         },
 
@@ -69,9 +73,9 @@ const ExchangeItemList = BaseComponent.extend(
             this.$el = $el;
             this.$content = $content;
 
-            if( this.isEditMode() ){
+            if( ! this.isProductionMode() ){
                 //编辑模式, 显示一个图片占位
-                $(`<img class="editor-place-holder-img" src="${editorPlaceHolderImage}" title="交易所资产列表占位图片(非真实数据)" />`).appendTo( $content );
+                $(`<li><img class="editor-place-holder-img" src="${editorPlaceHolderImage}" title="交易所资产列表占位图片(非真实数据)" /></li>`).appendTo( $content );
             }
         },
 
@@ -84,7 +88,7 @@ const ExchangeItemList = BaseComponent.extend(
             let that = this;
             let data = this.data || {};
             let exchangeIdList = data.exchangeIdList || [];
-            if( ! this.isEditMode() && ! this.eventBinded && exchangeIdList.length > 0 ){
+            if( this.isProductionMode() && ! this.eventBinded && exchangeIdList.length > 0 ){
                 //正式环境才绑定事件, 并且Ajax请求每个交易所的详情数据
                 this.$content.on('click', '.glpb-exchange-list-item', function(e){
                     let $target = $(e.currentTarget);

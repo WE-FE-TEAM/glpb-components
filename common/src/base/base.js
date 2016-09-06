@@ -351,8 +351,8 @@ $.extend( ComponentBase.prototype, {
         <div class="editor-op-more">
             <div class="glpb-editor-op-btn glpb-editor-op-btn-move" data-direction="up" title="向上移动"><i class="fa fa-arrow-circle-up" aria-hidden="true"></i></div>
             <div class="glpb-editor-op-btn glpb-editor-op-btn-move" data-direction="down"  title="向下移动"><i class="fa fa-arrow-circle-down" aria-hidden="true"></i></div>
-            <div class="glpb-editor-op-btn glpb-editor-op-btn-move" data-direction="left"  title="向左移动"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></div>
-            <div class="glpb-editor-op-btn glpb-editor-op-btn-move" data-direction="right"  title="向右移动"><i class="fa fa-arrow-circle-right" aria-hidden="true"></i></div>
+            <!--<div class="glpb-editor-op-btn glpb-editor-op-btn-move" data-direction="left"  title="向左移动"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></div>-->
+            <!--<div class="glpb-editor-op-btn glpb-editor-op-btn-move" data-direction="right"  title="向右移动"><i class="fa fa-arrow-circle-right" aria-hidden="true"></i></div>-->
             <div class="glpb-editor-op-btn glpb-editor-op-btn-edit" title="编辑"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></div>
             <div class="glpb-editor-op-btn glpb-editor-op-btn-delete" title="!!删除!!"><i class="fa fa-trash" aria-hidden="true"></i></div>
         </div>

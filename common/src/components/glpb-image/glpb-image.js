@@ -16,6 +16,8 @@ const $ = ComponentBase.$;
 
 const tpl = `<div><img /></div>`;
 
+const imageHolderURL = __uri('./assets/img-holder.png');
+
 const ImageView = ComponentBase.extend(
     {
         componentName : 'glpb_image',
@@ -35,7 +37,7 @@ const ImageView = ComponentBase.extend(
         getDefaultData : function(){
             return {
                 "imageURL_$$comment" : '要展示的图片URL地址',
-                imageURL : '//placehold.it/350x150',
+                imageURL : imageHolderURL,
                 'title__$$comment' : '鼠标移动到图片上时,显示的文字',
                 title : '',
                 'alt__$$comment' : '图片加载失败时, 显示的文字',
