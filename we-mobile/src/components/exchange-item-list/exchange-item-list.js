@@ -67,9 +67,9 @@ const ExchangeItemList = BaseComponent.extend(
 
             let cssClass = this.getBaseCssClass() + '  ';
             let cssStyle = this.translateStyle( this.style );
-            let $el = $(tpl).addClass( cssClass );
+            let $el = $(tpl).addClass( cssClass ).css( cssStyle );;
             let $content = $('.glpb-exchange-list', $el);
-            $content.css( cssStyle );
+
             this.$el = $el;
             this.$content = $content;
 
@@ -77,11 +77,6 @@ const ExchangeItemList = BaseComponent.extend(
                 //编辑模式, 显示一个图片占位
                 $(`<li><img class="editor-place-holder-img" src="${editorPlaceHolderImage}" title="交易所资产列表占位图片(非真实数据)" /></li>`).appendTo( $content );
             }
-        },
-
-        updateCSSStyle : function(style){
-
-            this.$content.css( style );
         },
 
         bindComponentEvent : function(){
