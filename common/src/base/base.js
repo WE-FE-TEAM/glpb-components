@@ -34,7 +34,12 @@ function ComponentBase( args ){
 
     this.$el = null;
     this.style = $.extend( this.getDefaultStyle(), args.style );
-    this.data = $.extend( this.getDefaultData(), args.data );
+    if( this.getDataType() === ComponentBase.DATA_TYPES.JSON ){
+        this.data = $.extend( this.getDefaultData(), args.data );
+    }else if( this.getDataType() === ComponentBase.DATA_TYPES.RICH_TEXT ){
+        this.data = args.data || this.getDefaultData();
+    }
+
     this.components = args.components || this.getDefaultComponents();
 
     //当前组件实时含有的所有子组件引用数组
@@ -418,7 +423,7 @@ $.extend( ComponentBase.prototype, {
     },
 
     getDataType : function(){
-        return 'json';
+        return ComponentBase.DATA_TYPES.JSON;
     },
 
     getData : function(){
@@ -550,6 +555,12 @@ ComponentBase.PLATFORM = {
     PC : 'pc',
     MOBILE : 'mobile',
     RESPONSIVE : 'responsive'
+};
+
+//组件内的数据类型
+ComponentBase.DATA_TYPES = {
+    JSON : 'json',
+    RICH_TEXT : 'richtext'
 };
 
 

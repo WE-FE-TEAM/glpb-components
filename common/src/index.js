@@ -15,6 +15,8 @@ const LayoutColumn = require('./components/layout-column/layout-column.js');
 const Image = require('./components/glpb-image/glpb-image.js');
 const Carousel = require('./components/glpb-carousel/glpb-carousel.js');
 
+const RichText = require('./components/glpb-rich-text/glpb-rich-text.js');
+
 
 
 module.exports = {
@@ -24,5 +26,6 @@ module.exports = {
     LayoutRow,
     LayoutColumn,
     Image,
-    Carousel
+    Carousel,
+    RichText
 };
