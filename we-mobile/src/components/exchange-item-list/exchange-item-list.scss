@@ -116,6 +116,10 @@
     }
   }
 
+  .glpb-exchange-list-item:last-of-type{
+    margin-bottom: 0;
+  }
+
   //编辑模式的占位图片
   .editor-place-holder-img{
     border:0 none;
