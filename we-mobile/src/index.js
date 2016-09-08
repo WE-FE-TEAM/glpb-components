@@ -11,6 +11,8 @@ const bridgeXXX = require('./bridgeXXX/bridgeXXX.js');
 
 const ExchangeItemList = require('./components/exchange-item-list/exchange-item-list.js');
 
+const FundItemList = require('./components/fund-item-list/fund-item-list.js');
+
 const BaseComponent = glpbCommon.BaseComponent;
 
 
@@ -19,5 +21,6 @@ const BaseComponent = glpbCommon.BaseComponent;
 
 module.exports = {
     bridgeXXX,
-    ExchangeItemList
+    ExchangeItemList,
+    FundItemList
 };

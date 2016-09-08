@@ -1,0 +1,7 @@
+
+
+//针对移动端UE给出的 750px 宽度设计稿,传入PSD上的px值,返回等比例下的 rem 值,包含 'rem'
+@function px2rem($px-number){
+  @return $px-number / 100 + rem;
+}
+

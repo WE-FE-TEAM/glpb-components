@@ -25,6 +25,16 @@ const apiConf = {
         data : {
 
         }
+    },
+
+    //批量获取多个基金的详情, 用于基金列表页的显示
+    getListBatchDetail : {
+        url: `${MOBILE_URL_PREFIX}/fund/fund/listBatchDetail`,
+        method: 'GET',
+        dataType: 'json',
+        data : {
+
+        }
     }
 
 };

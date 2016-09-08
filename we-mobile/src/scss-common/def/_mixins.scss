@@ -1,0 +1,36 @@
+//全局通用的 mixins  放在这里
+//在 750px 的2倍大小PSD下量出来的 font-siz
+@mixin px2px($name, $px){
+  #{$name}: round($px / 2) * 1px;
+  [data-dpr="2"] & {
+    #{$name}: $px * 1px;
+  }
+  // for mx3
+  [data-dpr="2.5"] & {
+    #{$name}: round($px * 2.5 / 2) * 1px;
+  }
+  // for 小米note
+  [data-dpr="2.75"] & {
+    #{$name}: round($px * 2.75 / 2) * 1px;
+  }
+  [data-dpr="3"] & {
+    #{$name}: round($px / 2 * 3) * 1px
+  }
+  // for 三星note4
+  [data-dpr="4"] & {
+    #{$name}: $px * 2px;
+  }
+}
+
+//
+@mixin border-radius($radius){
+  -webkit-border-radius:$radius;
+  -moz-border-radius:$radius;
+  border-radius:$radius;
+}
+
+@mixin box-sizing($type){
+  -webkit-box-sizing: $type;
+  -moz-box-sizing: $type;
+  box-sizing: $type;
+}
