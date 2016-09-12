@@ -31,7 +31,10 @@ const FundItemList = BaseComponent.extend(
         componentName : 'glpb_we_com_fund_item_list',
         componentNameZh : '基金产品列表',
         componentCategory : BaseComponent.CATEGORY.UI,
-        platform : BaseComponent.PLATFORM.MOBILE
+        platform : BaseComponent.PLATFORM.MOBILE,
+        canBeChildOfComponentName : function(){
+            return true;
+        }
     },
     {
         getDefaultStyle : function(){

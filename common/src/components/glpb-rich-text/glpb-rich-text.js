@@ -21,7 +21,10 @@ const RichText = ComponentBase.extend(
         componentName : 'glpb_rich_text',
         componentNameZh : '富文本块',
         componentCategory : ComponentBase.CATEGORY.UI,
-        platform : ComponentBase.PLATFORM.RESPONSIVE
+        platform : ComponentBase.PLATFORM.RESPONSIVE,
+        canBeChildOfComponentName : function(){
+            return true;
+        }
     },
     {
         getDefaultStyle : function(){

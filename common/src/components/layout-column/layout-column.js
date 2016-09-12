@@ -21,7 +21,10 @@ const LayoutColumn = ComponentBase.extend(
         componentName : 'layout_column',
         componentNameZh : '列',
         componentCategory : ComponentBase.CATEGORY.BASE,
-        platform : ComponentBase.PLATFORM.RESPONSIVE
+        platform : ComponentBase.PLATFORM.RESPONSIVE,
+        canBeChildOfComponentName : function(componentName){
+            return componentName === 'layout_row';
+        }
     },
     {
         getDefaultStyle : function(){

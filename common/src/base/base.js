@@ -27,6 +27,8 @@ function ComponentBase( args ){
     this.parentId = args.parentId || null;
     //当前组件ID
     this.componentId = args.componentId;
+    // //DOM上的ID
+    // this.domId = this.componentId;
     //当前组件名
     this.componentName = this.constructor.componentName;
     //当前组件实例的名字
@@ -445,6 +447,15 @@ $.extend( ComponentBase.prototype, {
     },
 
     /**
+     * 当前组件是否能被作为子组件, 插入到 componentName 类型的父组件下
+     * @param componentName {string} 父组件类型
+     * @returns {boolean}
+     */
+    canBeChildOfComponentName : function(componentName){
+        return this.constructor.canBeChildOfComponentName( componentName );
+    },
+
+    /**
      * 在子组件数组的 index 位置上, 插入新的组件, **不进行** DOM操作
      * @param component {object} 组件实例引用
      * @param index {int} 要插入的位置
@@ -513,6 +524,7 @@ ComponentBase.extend = function( statics, prototype){
                 if( this.isEditMode() ){
                     this.renderEditorHelper();
                 }
+                $el.attr('id', this.componentId );
             }
             this.afterRender();
         };
@@ -520,6 +532,10 @@ ComponentBase.extend = function( statics, prototype){
     function Component(){
         ComponentBase.apply( this, [].slice.call(arguments) );
     }
+    
+    Component.canBeChildOfComponentName = function(){
+        return false;
+    };
     
     $.extend( Component, statics);
     function parent(){}

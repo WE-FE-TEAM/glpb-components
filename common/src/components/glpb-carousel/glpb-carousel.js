@@ -23,7 +23,10 @@ const Carousel = ComponentBase.extend(
         componentName : 'glpb_carousel',
         componentNameZh : '轮播图',
         componentCategory : ComponentBase.CATEGORY.UI,
-        platform : ComponentBase.PLATFORM.RESPONSIVE
+        platform : ComponentBase.PLATFORM.RESPONSIVE,
+        canBeChildOfComponentName : function(){
+            return true;
+        }
     },
     {
         getDefaultStyle : function(){

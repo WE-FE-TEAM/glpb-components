@@ -122,3 +122,23 @@ singleton.escapeHTML = function( str ){
         .replace(/</g, '&lt;')
         .replace(/>/g, '&gt;');
 };
+
+/**
+ * 将CSS中的px转换成 rem 的数值, 用在移动端自适应场景下
+ * @param pxNumber {number} px为单位的长度数字
+ * @returns {number}
+ */
+singleton.px2rem = function(pxNumber){
+    pxNumber = pxNumber || 0;
+    return pxNumber / 100;
+};
+
+/**
+ * 移动端将 rem 为单位的长度数值,转换成 px 为单位的, 用在自适应场景下
+ * @param remNumber {number} rem为单位的长度数值
+ * @returns {number} px 为单位的长度数值
+ */
+singleton.rem2px = function(remNumber){
+    remNumber = remNumber || 0;
+    return remNumber * 100;
+};

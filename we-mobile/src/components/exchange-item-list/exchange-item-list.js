@@ -32,7 +32,10 @@ const ExchangeItemList = BaseComponent.extend(
         componentName : 'glpb_we_com_exchange_item_list',
         componentNameZh : '交易所产品列表',
         componentCategory : BaseComponent.CATEGORY.UI,
-        platform : BaseComponent.PLATFORM.MOBILE
+        platform : BaseComponent.PLATFORM.MOBILE,
+        canBeChildOfComponentName : function(){
+            return true;
+        }
     },
     {
         getDefaultStyle : function(){

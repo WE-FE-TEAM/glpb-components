@@ -21,7 +21,10 @@ const LayoutRow = ComponentBase.extend(
         componentName : 'layout_row',
         componentNameZh : '独占行',
         componentCategory : ComponentBase.CATEGORY.BASE,
-        platform : ComponentBase.PLATFORM.RESPONSIVE
+        platform : ComponentBase.PLATFORM.RESPONSIVE,
+        canBeChildOfComponentName : function(componentName){
+            return true;
+        }
     }, 
     {
         getDefaultStyle : function(){
@@ -30,7 +33,7 @@ const LayoutRow = ComponentBase.extend(
                 width : 'auto',
                 background : {},
                 padding : '0',
-                margin : '0 auto 10px'
+                margin : '0 auto 0px'
             };
         },
         getDefaultComponents : function(){

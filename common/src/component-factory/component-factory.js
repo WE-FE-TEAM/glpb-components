@@ -32,6 +32,11 @@ module.exports = singleton;
  */
 singleton.registerComponentClass = function(componentName, componentClass){
 
+    if( componentName.toLowerCase() === 'root' ){
+        // root 类型的为保留, 专门指 页面  本身, 不允许任何组件注册这个类型
+        throw new Error(`组件类型(componentName)不能是  root  !!`);
+    }
+
     if( componentClassMap[componentName] ){
         throw new Error(`componentName[${componentName}]已经存在了!!不能有相同的组件名`);
     }
