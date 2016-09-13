@@ -6,22 +6,22 @@
 'use strict';
 
 
-const ComponentBase = require('../../base/base.js');
+const BaseComponent = require('../../base/base.js');
 
 const utils = require('../../utils/utils.js');
 
 require('./layout-row.scss');
 
-const $ = ComponentBase.$;
+const $ = BaseComponent.$;
 
 const tpl = `<div><div class="glpb-com-content clearfix"></div></div>`;
 
-const LayoutRow = ComponentBase.extend(
+const LayoutRow = BaseComponent.extend(
     {
         componentName : 'layout_row',
         componentNameZh : '独占行',
-        componentCategory : ComponentBase.CATEGORY.BASE,
-        platform : ComponentBase.PLATFORM.RESPONSIVE,
+        componentCategory : BaseComponent.CATEGORY.BASE,
+        platform : BaseComponent.PLATFORM.RESPONSIVE,
         canBeChildOfComponentName : function(componentName){
             return true;
         }
@@ -116,7 +116,7 @@ const LayoutRow = ComponentBase.extend(
 
         bindEditorEvent : function(){
             let that = this;
-            ComponentBase.prototype.bindEditorEvent.call( this );
+            BaseComponent.prototype.bindEditorEvent.call( this );
             this.$content
                 .droppable({
                 // accept : '.lpb-component',
@@ -149,7 +149,7 @@ const LayoutRow = ComponentBase.extend(
         },
 
         editorHandleChildMove : function(componentId, direction){
-            let newIndex = ComponentBase.prototype.editorHandleChildMove.call( this, componentId, direction);
+            let newIndex = BaseComponent.prototype.editorHandleChildMove.call( this, componentId, direction);
             if( newIndex >= 0 ){
                 let $child = this.page.getComponentById(componentId).$getElement();
                 utils.moveChildInParent($child, this.$content, newIndex);

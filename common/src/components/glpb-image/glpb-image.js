@@ -70,6 +70,12 @@ const ImageView = ComponentBase.extend(
             let cssStyle = this.translateStyle( this.style );
             let $el = $(tpl).addClass( cssClass ).css( cssStyle );
             let $content = $('img', $el);
+
+            $content.css({
+                width : cssStyle.width,
+                height : cssStyle.height
+            });
+
             this.$el = $el;
             this.$content = $content;
 
@@ -97,6 +103,8 @@ const ImageView = ComponentBase.extend(
                 width : style.width,
                 height : style.height
             });
+
+            this.$el.css( style );
         },
 
         setData : function(data){

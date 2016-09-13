@@ -5,23 +5,24 @@
 
 'use strict';
 
-const ComponentBase = require('../../base/base.js');
+const BaseComponent = require('../../base/base.js');
 
 require('./layout-column.scss');
 
-const $ = ComponentBase.$;
-const utils = ComponentBase.utils;
+const $ = BaseComponent.$;
+const utils = BaseComponent.utils;
+const componentFactory = BaseComponent.componentFactory;
 
 const tpl = `<div><div class="glpb-com-content clearfix"></div></div>`;
 
 
 
-const LayoutColumn = ComponentBase.extend(
+const LayoutColumn = BaseComponent.extend(
     {
         componentName : 'layout_column',
         componentNameZh : '列',
-        componentCategory : ComponentBase.CATEGORY.BASE,
-        platform : ComponentBase.PLATFORM.RESPONSIVE,
+        componentCategory : BaseComponent.CATEGORY.BASE,
+        platform : BaseComponent.PLATFORM.RESPONSIVE,
         canBeChildOfComponentName : function(componentName){
             return componentName === 'layout_row';
         }
@@ -69,10 +70,16 @@ const LayoutColumn = ComponentBase.extend(
         },
         bindEditorEvent : function(){
             let that = this;
-            ComponentBase.prototype.bindEditorEvent.call( this );
+            BaseComponent.prototype.bindEditorEvent.call( this );
             this.$content.droppable({
                 // accept : '.lpb-component',
-                accept : '[data-com-name]:not([data-com-name=layout_column])',
+                // accept : '[data-com-name]:not([data-com-name=layout_column])',
+                accept : function($draggable){
+
+                    let componentName = $draggable.attr('data-com-name');
+                    let componentClass = componentFactory.getComponentClass( componentName );
+                    return that.canAcceptChildComponentName(componentName) && componentClass && componentClass.canBeChildOfComponentName('glpb_we_com_swiper_item');
+                },
                 greedy : true,
                 classes: {
                     "ui-droppable-active": "custom-state-active",
@@ -110,13 +117,17 @@ const LayoutColumn = ComponentBase.extend(
 
             // $('.ui-sortable').sortable('refresh');
         },
+
+        canAcceptChildComponentName : function(componentName){
+            return ['layout_column'].indexOf(componentName) < 0;
+        },
         
         //要添加新的一个组件
         addComponent : function(componentName){
             let config = {
                 componentName : componentName,
                 parentId : this.componentId,
-                componentId : ComponentBase.generateComponentId()
+                componentId : BaseComponent.generateComponentId()
             };
             let instance = this.page.createComponentInstance(config);
             if( instance ){
@@ -154,7 +165,7 @@ const LayoutColumn = ComponentBase.extend(
             }
         },
         editorHandleChildMove : function(componentId, direction){
-            let newIndex = ComponentBase.prototype.editorHandleChildMove.call( this, componentId, direction);
+            let newIndex = BaseComponent.prototype.editorHandleChildMove.call( this, componentId, direction);
             if( newIndex >= 0 ){
                 let $child = this.page.getComponentById(componentId).$getElement();
                 utils.moveChildInParent($child, this.$content, newIndex);

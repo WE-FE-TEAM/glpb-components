@@ -533,7 +533,7 @@ ComponentBase.extend = function( statics, prototype){
         ComponentBase.apply( this, [].slice.call(arguments) );
     }
     
-    Component.canBeChildOfComponentName = function(){
+    Component.canBeChildOfComponentName = function(componentName){
         return false;
     };
     
@@ -554,6 +554,7 @@ ComponentBase.extend = function( statics, prototype){
 ComponentBase.$ = $;
 ComponentBase.utils = utils;
 ComponentBase.generateComponentId = utils.generateComponentId;
+ComponentBase.componentFactory = componentFactory;
 
 //基础组件
 const CATEGORY_BASE = 'CATE_BASE';
