@@ -48,7 +48,7 @@ const ExchangeItemList = BaseComponent.extend(
                 },
                 width : '1080px',
                 padding : '0',
-                margin : '0'
+                margin : '0 auto'
             };
         },
 
@@ -174,33 +174,49 @@ const ExchangeItemList = BaseComponent.extend(
                 startAmount = numeral( obj.startAmount ).format('0,0.00');
             }
 
+            //募集进度
+            let progress = 0;
+            let actualAmount = obj.actualAmount;
+            let totalAmount = obj.totalAmount;
+
+            let temp = actualAmount * 100 / totalAmount;
+            if( ! isNaN( temp ) ){
+                progress = temp;
+            }
+
+            progress = Math.min( progress, 100 );
+            progress = Math.max( 0, progress);
+
             return `<li class="glpb-exchange-list-item" data-exchange-id="${obj.productNo}">
                         <h2 class="exchange-item-title">
                             <a href="${detailURL}" target="_blank">${nameEscaped}</a>
                         </h2>
                         <div class="exchange-item-info-main clearfix">
                             <div class="info-box year-rate-box w127">
-                                <div class="product-year-rate highlight"><span class="num-family">${obj.annualRate}</span>%</div>
+                                <div class="product-year-rate highlight bd"><span class="num-family">${obj.annualRate}</span>%</div>
                                 <div class="info">预期年收益</div>
                             </div>
                             <div class="info-box product-period-box w191">
-                                <div class="product-period"><span class="num-family">${obj.productPeriod}</span>天</div>
+                                <div class="product-period bd"><span class="num-family">${obj.productPeriod}</span>天</div>
                                 <div class="info">期限</div>
                             </div>
                             <div class="info-box product-start-amount-box w181">
-                                <div>${startAmount}元</div>
+                                <div class="bd">${startAmount}元</div>
                                 <div class="info">起投金额</div>
                             </div>
                             <div class="info-box product-source-box w280">
-                                <div>${sourceEscaped}</div>
+                                <div class="bd fn-text-overflow">${sourceEscaped}</div>
                                 <div class="info">项目来源</div>
                             </div>
                             <div class="info-box product-process-box w112 ">
-                                <div>${sourceEscaped}</div>
+                                <div class="bd clear fn-clear">
+                                    <div class=" process-text">${progress}%</div>
+                                    <div class="process-bar"><div class="process-bar-inner" style="width: ${progress}%;"></div></div>
+                                </div>
                                 <div class="info">募集进度</div>
                             </div>
                             <div class="info-box product-btn-box w95 ">
-                                
+                                <a href="${detailURL}" target="_blank" class="buy-btn">投 资</a>
                             </div>
                         </div>
                        

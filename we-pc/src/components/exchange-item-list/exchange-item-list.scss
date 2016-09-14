@@ -5,10 +5,8 @@
 
   $highlight-color: #ff7422;
 
-  background: #e8eaec;
-
   .glpb-exchange-list{
-
+    border-top: 1px solid #f4f4f4;
   }
 
   .glpb-exchange-list-item{
@@ -16,12 +14,14 @@
     text-align: left;
     color: #848484;
     padding: 0 20px;
+    border-bottom: 1px solid #f4f4f4;
 
     //交易所标题区域
     .exchange-item-title{
 
       $height: 16px;
 
+      padding: 20px 0 0;
       font-size: 16px;
       height: $height;
       line-height: $height;
@@ -44,7 +44,8 @@
 
     .exchange-item-info-main{
 
-      margin-top: 20px;
+      margin-top: 17px;
+      padding-bottom: 22px;
 
       .info-box{
         float: left;
@@ -52,8 +53,14 @@
         color: #2b2b2b;
       }
 
+      .bd{
+        line-height: 40px;
+        height: 30px;
+      }
+
       .info{
         font-size: 12px;
+        margin-top: 12px;
         color: #848484;
       }
 
@@ -98,6 +105,8 @@
       //投资期限
       .product-period-box{
 
+        text-align: center;
+
         .product-period{
 
           .num-family{
@@ -106,21 +115,56 @@
         }
       }
 
+      //起投金额
+      .product-start-amount-box{
+
+        text-align: center;
+      }
+
+      //项目来源
+      .product-source-box{
+        text-align: center;
+      }
+
       //募集进度区域
       .product-process-box{
         padding-left: 50px;
+
+        .process-text{
+          float: left;
+          width: 50px;
+        }
+
+        .process-bar{
+          float: left;
+          width: 50px;
+          height: 3px;
+          margin-top: 18px;
+          background: #f1f1f1;
+
+          .process-bar-inner{
+            height: 100%;
+            background: #3a84cf;
+          }
+        }
       }
 
       .buy-btn{
         float: right;
+        width: 70px;
+        height: 28px;
+        line-height: 28px;
+        margin-top: 8px;
+        font-size: 12px;
         text-align: center;
         color: #fff;
         background: #ff721f;
+        text-decoration: none;
         -webkit-box-sizing: border-box;
         -moz-box-sizing: border-box;
         box-sizing: border-box;
-        -webkit-border-radius:6px;
-        border-radius:6px;
+        -webkit-border-radius:2px;
+        border-radius:2px;
       }
 
     }
