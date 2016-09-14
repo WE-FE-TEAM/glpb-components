@@ -1,0 +1,136 @@
+
+
+.glpb-com-glpb_we_com_pc_exchange_item_list{
+
+
+  $highlight-color: #ff7422;
+
+  background: #e8eaec;
+
+  .glpb-exchange-list{
+
+  }
+
+  .glpb-exchange-list-item{
+
+    text-align: left;
+    color: #848484;
+    padding: 0 20px;
+
+    //交易所标题区域
+    .exchange-item-title{
+
+      $height: 16px;
+
+      font-size: 16px;
+      height: $height;
+      line-height: $height;
+
+      white-space:nowrap;
+      overflow: hidden;
+      -ms-text-overflow: ellipsis;
+      text-overflow: ellipsis;
+
+      a{
+
+        color: #333;
+        text-decoration: none;
+
+        &:hover{
+          color: #3a84cf;
+        }
+      }
+    }
+
+    .exchange-item-info-main{
+
+      margin-top: 20px;
+
+      .info-box{
+        float: left;
+        font-size: 16px;
+        color: #2b2b2b;
+      }
+
+      .info{
+        font-size: 12px;
+        color: #848484;
+      }
+
+      .w127{
+        width: 127px;
+      }
+
+      .w191{
+        width: 191px;
+      }
+
+      .w181{
+        width: 181px;
+      }
+
+      .w280{
+        width: 280px;
+      }
+
+      .w112{
+        width: 112px;
+      }
+
+      .w95{
+        width: 95px;
+      }
+
+      //年利率
+      .year-rate-box{
+
+        .product-year-rate{
+
+          font-size: 14px;
+          color: $highlight-color;
+
+          .num-family{
+            font-size: 30px;
+          }
+        }
+      }
+
+      //投资期限
+      .product-period-box{
+
+        .product-period{
+
+          .num-family{
+
+          }
+        }
+      }
+
+      //募集进度区域
+      .product-process-box{
+        padding-left: 50px;
+      }
+
+      .buy-btn{
+        float: right;
+        text-align: center;
+        color: #fff;
+        background: #ff721f;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+        -webkit-border-radius:6px;
+        border-radius:6px;
+      }
+
+    }
+
+  }
+
+  //编辑模式的占位图片
+  .editor-place-holder-img{
+    border:0 none;
+    display: block;
+  }
+
+}
