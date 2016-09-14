@@ -8,8 +8,40 @@
   .glpb-swiper-wrapper{
     position: relative;
   }
+
+  .next-page-arrow{
+    position: absolute;
+    width: 0.6rem;
+    margin-left: -0.3rem;
+    left: 50%;
+    bottom: 0.5rem;
+    -webkit-animation:glpb-swiper-container-next-arrow 2s infinite;
+    animation:glpb-swiper-container-next-arrow 2s infinite;
+    z-index: 9;
+  }
+
+  &.glpb-swiper-last{
+
+    .next-page-arrow{
+      display: none;
+    }
+  }
 }
 
+@-webkit-keyframes glpb-swiper-container-next-arrow{
+  0%,20%{
+    opacity: 0;
+    -webkit-transform: translate(0,10px);
+  }
+  60%{
+    opacity: 1;
+    -webkit-transform: translate(0,0);
+  }
+  100%{
+    opacity: 0;
+    -webkit-transform:translate(0,-10px);
+  }
+}
 
 .gplb-sys-editor{
 
@@ -23,6 +55,10 @@
 
     .swiper-wrapper{
       display: block;
+    }
+
+    .next-page-arrow{
+      display: none;
     }
 
     .glpb-swiper-container-drop-area{

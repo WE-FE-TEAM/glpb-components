@@ -21,8 +21,9 @@ const utils = BaseComponent.utils;
 
 const componentFactory = BaseComponent.componentFactory;
 
+const arrowImage = __inline('./assets/arrow.png');
 
-const tpl = `<div><div class="swiper-container"><div class="glpb-swiper-wrapper swiper-wrapper"></div></div></div>`;
+const tpl = `<div><div class="swiper-container"><div class="glpb-swiper-wrapper swiper-wrapper"></div></div><img src="${arrowImage}" class="next-page-arrow" /></div>`;
 
 
 const SwiperContainer = BaseComponent.extend(
@@ -50,7 +51,9 @@ const SwiperContainer = BaseComponent.extend(
         getDefaultData : function(){
             return {
                 'direction__$$comment' : '滚屏的方向,垂直(vertical)或水平(horizontal)',
-                direction : 'vertical'
+                direction : 'vertical',
+                'loop__$$comment' : '到底后是否循环滑动: true循环;false不循环',
+                loop : false
             };
         },
 
@@ -118,16 +121,27 @@ const SwiperContainer = BaseComponent.extend(
         },
 
         bindComponentEvent : function(){
+            let that = this;
             if( ! this.isEditMode() ){
                 let data = this.data;
                 //在正式环境或预览环境, 切换到swiper滚屏效果
                 let conf = {
-                    direction : data.direction
+                    direction : data.direction,
+                    onSlideChangeEnd : function(swiper){
+                        const reachLastClass = 'glpb-swiper-last';
+                        if( ! swiper.params.loop ){
+                            if( ! swiper.isEnd ){
+                                that.$el.removeClass(reachLastClass);
+                            }else{
+                                that.$el.addClass(reachLastClass);
+                            }
+                        }
+                    }
                 };
                 if( this.isPreviewMode() ){
                     conf.mousewheelControl = true;
                 }
-                this.swiper = new Swiper( this.$el[0], conf);
+                this.swiper = new Swiper( this.$swipeContainer[0], conf);
             }
         },
 

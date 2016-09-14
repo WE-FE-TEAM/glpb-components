@@ -8,9 +8,9 @@
   },
   "author": "",
   "license": "ISC",
-  "devDependencies": {
-  },
+  "devDependencies": {},
   "dependencies": {
-
+    "moment": "^2.9.0",
+    "numeral": "^1.5.3"
   }
 }

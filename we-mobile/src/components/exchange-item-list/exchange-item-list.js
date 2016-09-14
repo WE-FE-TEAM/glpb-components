@@ -6,6 +6,10 @@
 
 'use strict';
 
+const moment = require('moment');
+
+const numeral = require('numeral');
+
 const glpbCommon = require('glpb-components-common');
 
 const serviceFactory = require('../../service/service-factory.js');
@@ -41,10 +45,10 @@ const ExchangeItemList = BaseComponent.extend(
         getDefaultStyle : function(){
             return {
                 background : {
-                    backgroundColor : '#e8eaec'
+                    backgroundColor : '#f0f0f0'
                 },
                 padding : '0',
-                margin : '0'
+                margin : '0.24rem 0 0'
             };
         },
 
@@ -152,6 +156,21 @@ const ExchangeItemList = BaseComponent.extend(
 
             let nameEscaped = utils.escapeHTML( obj.productName );
             let sourceEscaped = utils.escapeHTML( obj.projectSource );
+            
+            let startSellDate = '';
+            let endSellDate = '';
+
+            if( obj.startSellingTime ){
+                startSellDate = moment( parseInt( obj.startSellingTime, 10) ).format('MM.DD');
+            }
+            if( obj.endSellingTime ){
+                endSellDate = moment( parseInt( obj.endSellingTime, 10) ).format('MM.DD');
+            }
+
+            let startAmount = '';
+            if( obj.startAmount ){
+                startAmount = numeral( obj.startAmount ).format('0,0') + '元起';
+            }
 
             return `<li class="glpb-exchange-list-item" data-exchange-id="${obj.productNo}">
                         <h2 class="exchange-item-title">${nameEscaped}</h2>
@@ -165,12 +184,12 @@ const ExchangeItemList = BaseComponent.extend(
                                 <div class="info">期限</div>
                             </div>
                             <div class="info-box product-status-box">
-                                <div class="buy-btn">抢购</div>
+                                <div class="buy-btn">抢 购</div>
                             </div>
                         </div>
                         <div class="exchange-item-info-footer">
-                            <span class="start-amount">${obj.startAmount}元起</span>
-                            <span class="project-source">${sourceEscaped}</span>
+                            <span class="buy-duration">产品募集期：${startSellDate} - ${endSellDate}</span>
+                            <span class="start-amount">${startAmount}</span>
                         </div>
                 </li>`;
         }

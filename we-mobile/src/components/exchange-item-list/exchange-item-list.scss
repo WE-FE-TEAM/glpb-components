@@ -13,7 +13,6 @@
 
   .glpb-exchange-list-item{
 
-    padding: 0 0.3rem;
     margin-bottom: 0.1rem;
     text-align: left;
     color: #828282;
@@ -26,7 +25,10 @@
 
       height: $height;
       line-height: $height;
+      padding: 0 0.3rem;
       font-size: 0.26rem;
+      border-bottom: 1px solid #f4f4f4;
+      color: #333;
       white-space:nowrap;
       overflow: hidden;
       -ms-text-overflow: ellipsis;
@@ -36,6 +38,7 @@
     .exchange-item-info-main{
 
       height: 1.35rem;
+      padding: 0 0.3rem;
       border-bottom:1px solid #e5e5e5;
       text-align: center;
 
@@ -78,19 +81,19 @@
 
       .buy-btn{
         float: right;
-        width: 1.56rem;
-        height: 0.56rem;
-        line-height: 0.52rem;
+        width: 1.7rem;
+        height: 0.6rem;
+        line-height: 0.6rem;
         margin-top: 0.05rem;
-        font-size: 0.26rem;
+        font-size: 0.28rem;
         text-align: center;
-        color: $highlight-color;
-        border: 2px solid $highlight-color;
+        color: #fff;
+        background: #ff721f;
         -webkit-box-sizing: border-box;
         -moz-box-sizing: border-box;
         box-sizing: border-box;
-        -webkit-border-radius:3px;
-        border-radius:3px;
+        -webkit-border-radius:6px;
+        border-radius:6px;
       }
 
     }
@@ -101,17 +104,16 @@
 
       height: $footer-height;
       line-height: $footer-height;
+      padding: 0 0.3rem;
       font-size: 0.22rem;
+      color: #888;
 
       .start-amount{
-        padding-left: 0.3rem;
-        font-size: .22rem;
-        background: url(./assets/rmb-icon.png?__inline) scroll no-repeat 0 center;
-        background-size: 0.2rem 0.2rem;
+        float: right;
       }
 
-      .project-source{
-        float: right;
+      .buy-duration{
+
       }
     }
   }
