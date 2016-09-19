@@ -3,7 +3,7 @@
  */
 
 
-'use strict';
+
 
 
 const utils = require('../utils/utils.js');

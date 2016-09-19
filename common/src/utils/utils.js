@@ -2,7 +2,7 @@
  * Created by jess on 16/8/10.
  */
 
-'use strict';
+
 
 
 let singleton = {};

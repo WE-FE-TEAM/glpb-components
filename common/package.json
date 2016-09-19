@@ -1,6 +1,6 @@
 {
   "name": "glpb-components-common",
-  "version": "1.0.13",
+  "version": "1.0.14",
   "description": "common utils/base component of glpb components",
   "main": "./src/index.js",
   "scripts": {

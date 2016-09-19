@@ -4,7 +4,7 @@
  */
 
 
-'use strict';
+
 
 
 const glpbCommon = require('glpb-components-common');

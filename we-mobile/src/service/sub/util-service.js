@@ -3,7 +3,7 @@
  * Created by wangcheng on 16/6/16.
  */
 
-"use strict";
+
 
 
 

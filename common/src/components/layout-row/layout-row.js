@@ -3,7 +3,7 @@
  * Created by jess on 16/8/10.
  */
 
-'use strict';
+
 
 
 const BaseComponent = require('../../base/base.js');

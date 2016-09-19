@@ -3,7 +3,7 @@
  */
 
 
-'use strict';
+
 
 const BaseComponent = require('../../base/base.js');
 
