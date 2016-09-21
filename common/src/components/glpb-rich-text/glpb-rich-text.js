@@ -14,7 +14,7 @@ require('./glpb-rich-text.scss');
 
 const $ = ComponentBase.$;
 
-const tpl = `<div><div class="glpb-content"></div></div>`;
+const tpl = `<div class="glpb-fn-animate-item"><div class="glpb-content"></div></div>`;
 
 const RichText = ComponentBase.extend(
     {
@@ -39,7 +39,8 @@ const RichText = ComponentBase.extend(
                 background : {
                     backgroundColor : '#fff'
                 },
-                textAlign : 'left'
+                textAlign : 'left',
+                animation : 'none'
             };
         },
 

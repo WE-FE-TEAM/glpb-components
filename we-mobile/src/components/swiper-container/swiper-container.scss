@@ -26,20 +26,37 @@
       display: none;
     }
   }
+
+  //带有动画的组件
+  .glpb-fn-animate-item{
+    display: none;
+  }
+
+  //当前显示的一屏
+  .glpb-swiper-item-active{
+
+    //当前屏内部的动画组件切换到显示状态, 触发动画
+    .glpb-fn-animate-item{
+      display: block;
+    }
+  }
 }
 
 @-webkit-keyframes glpb-swiper-container-next-arrow{
   0%,20%{
     opacity: 0;
     -webkit-transform: translate(0,10px);
+    transform: translate(0,10px);
   }
   60%{
     opacity: 1;
     -webkit-transform: translate(0,0);
+    transform: translate(0,0);
   }
   100%{
     opacity: 0;
     -webkit-transform:translate(0,-10px);
+    transform:translate(0,-10px);
   }
 }
 
@@ -59,6 +76,11 @@
 
     .next-page-arrow{
       display: none;
+    }
+
+    //带有动画的组件
+    .glpb-fn-animate-item{
+      display: block;
     }
 
     .glpb-swiper-container-drop-area{

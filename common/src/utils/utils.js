@@ -97,6 +97,10 @@ singleton.translateComponentStyle = function( style ){
         }
     }
 
+    if( realStyle.animation ){
+        realStyle.WebkitAnimation = realStyle.animation;
+    }
+
     return realStyle;
 };
 

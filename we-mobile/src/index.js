@@ -9,6 +9,9 @@ const glpbCommon = require('glpb-components-common');
 
 const BaseComponent = glpbCommon.BaseComponent;
 
+//加载 CSS3 动画
+require('./scss-common/animation.scss');
+
 const bridgeXXX = require('./bridgeXXX/bridgeXXX.js');
 
 const Swiper = require('./lib/swiper/swiper.js');

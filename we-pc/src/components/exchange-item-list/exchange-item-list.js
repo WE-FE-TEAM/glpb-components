@@ -4,7 +4,7 @@
  */
 
 
-'use strict';
+
 
 const moment = require('moment');
 
@@ -46,7 +46,7 @@ const ExchangeItemList = BaseComponent.extend(
                 background : {
                     backgroundColor : '#fcfcfc'
                 },
-                width : '1080px',
+                width : 'auto',
                 padding : '0',
                 margin : '0 auto'
             };

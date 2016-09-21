@@ -16,7 +16,7 @@ require('./glpb-carousel.scss');
 
 const $ = ComponentBase.$;
 
-const tpl = `<div><div class="glpb-carousel-inner"></div></div>`;
+const tpl = `<div class="glpb-fn-animate-item"><div class="glpb-carousel-inner"></div></div>`;
 
 const Carousel = ComponentBase.extend(
     {
@@ -33,7 +33,8 @@ const Carousel = ComponentBase.extend(
             return {
                 height : '200px',
                 width : '100%',
-                margin : '0 auto'
+                margin : '0 auto',
+                animation : 'none'
             };
         },
 

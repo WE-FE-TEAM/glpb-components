@@ -14,7 +14,7 @@ require('./glpb-image.scss');
 
 const $ = ComponentBase.$;
 
-const tpl = `<div><img /></div>`;
+const tpl = `<div class="glpb-fn-animate-item"><img /></div>`;
 
 const imageHolderURL = __uri('./assets/img-holder.png');
 
@@ -33,7 +33,8 @@ const ImageView = ComponentBase.extend(
             return {
                 height : 'auto',
                 width : 'auto',
-                margin : '0 auto'
+                margin : '0 auto',
+                animation : 'none'
             };
         },
 

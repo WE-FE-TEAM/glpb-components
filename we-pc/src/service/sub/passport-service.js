@@ -4,7 +4,7 @@
  * Created by 王半仙 on 16/6/13.
  */
 
-'use strict';
+
 
 
 

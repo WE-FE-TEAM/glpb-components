@@ -44,7 +44,7 @@ const SwiperContainer = BaseComponent.extend(
                 },
                 padding : '0',
                 margin : '0',
-                height : '13.34rem'
+                height : 'auto'
             };
         },
 
@@ -73,11 +73,11 @@ const SwiperContainer = BaseComponent.extend(
             let $swipeContainer = $el.find('.swiper-container');
             let $content = $el.find('.glpb-swiper-wrapper');
 
-            $swipeContainer.css( cssStyle );
-
             this.$el = $el;
             this.$swipeContainer = $swipeContainer;
             this.$content = $content;
+
+            this.updateCSSStyle( cssStyle );
 
             let components = this.components || [];
             let componentRefs = this.componentRefs;
@@ -113,7 +113,16 @@ const SwiperContainer = BaseComponent.extend(
         },
 
         updateCSSStyle : function( cssStyle ){
+            //如果没有明确设定高度, 取 window.innerHeight 作为高度
+            let height = cssStyle.height;
+            if( height === 'auto' ){
+                height = window.innerHeight || $(window).height();
+                cssStyle.height = height + 'px';
+            }
             this.$swipeContainer.css( cssStyle );
+            this.$el.css({
+                height : height
+            });
         },
 
         canAcceptChildComponentName : function( componentName ){
@@ -127,6 +136,9 @@ const SwiperContainer = BaseComponent.extend(
                 //在正式环境或预览环境, 切换到swiper滚屏效果
                 let conf = {
                     direction : data.direction,
+                    slideActiveClass : 'glpb-swiper-item-active',
+                    slideNextClass : 'glpb-swiper-item-next',
+                    slidePrevClass : 'glpb-swiper-item-prev',
                     onSlideChangeEnd : function(swiper){
                         const reachLastClass = 'glpb-swiper-last';
                         if( ! swiper.params.loop ){

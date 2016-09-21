@@ -14,7 +14,7 @@ require('./layout-row.scss');
 
 const $ = BaseComponent.$;
 
-const tpl = `<div><div class="glpb-com-content clearfix"></div></div>`;
+const tpl = `<div class="glpb-fn-animate-item"><div class="glpb-com-content clearfix"></div></div>`;
 
 const LayoutRow = BaseComponent.extend(
     {
@@ -33,7 +33,8 @@ const LayoutRow = BaseComponent.extend(
                 width : 'auto',
                 background : {},
                 padding : '0',
-                margin : '0 auto 0px'
+                margin : '0 auto 0px',
+                animation : 'none'
             };
         },
         getDefaultComponents : function(){
