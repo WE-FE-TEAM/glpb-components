@@ -4,7 +4,7 @@
 
 
 
-
+const $ = window.jQuery;
 
 const utils = require('./utils/utils.js');
 const BaseComponent = require('./base/base.js');
@@ -27,5 +27,6 @@ module.exports = {
     LayoutColumn,
     Image,
     Carousel,
-    RichText
+    RichText,
+    "$" : $
 };

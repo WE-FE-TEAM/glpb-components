@@ -8,11 +8,11 @@
 
 const BaseComponent = require('../../base/base.js');
 
-const utils = require('../../utils/utils.js');
-
 require('./layout-row.scss');
 
 const $ = BaseComponent.$;
+const utils = BaseComponent.utils;
+const componentFactory = BaseComponent.componentFactory;
 
 const tpl = `<div class="glpb-fn-animate-item"><div class="glpb-com-content clearfix"></div></div>`;
 
@@ -29,7 +29,7 @@ const LayoutRow = BaseComponent.extend(
     {
         getDefaultStyle : function(){
             return {
-                height : 'auto',
+                height : '300px',
                 width : 'auto',
                 background : {},
                 padding : '0',
@@ -38,13 +38,8 @@ const LayoutRow = BaseComponent.extend(
             };
         },
         getDefaultComponents : function(){
-            let rowComponentId = this.componentId;
-            let columnConf = {
-                parentId : rowComponentId,
-                componentId : utils.generateComponentId(),
-                componentName  : 'layout_column'
-            };
-            return [ columnConf ];
+
+            return [  ];
         },
         init : function(){
             this.$content = null;
@@ -76,16 +71,15 @@ const LayoutRow = BaseComponent.extend(
             return $el;
         },
 
-        addColumn : function(){
-            let rowComponentId = this.componentId;
-            let columnConf = {
-                parentId : rowComponentId,
-                componentId : utils.generateComponentId(),
-                componentName  : 'layout_column'
+        addComponent : function( componentName ){
+            let config = {
+                componentName : componentName,
+                parentId : this.componentId,
+                componentId : BaseComponent.generateComponentId()
             };
 
             //创建新的列组件
-            let component = this.page.createComponentInstance(columnConf);
+            let component = this.page.createComponentInstance(config);
             component.render();
             let $el = component.$getElement();
             this.$content.append( $el );
@@ -121,7 +115,13 @@ const LayoutRow = BaseComponent.extend(
             this.$content
                 .droppable({
                 // accept : '.lpb-component',
-                accept : '[data-com-name=layout_column]',
+                // accept : '[data-com-name=layout_column]',
+                    accept : function($draggable){
+
+                        let componentName = $draggable.attr('data-com-name');
+                        let componentClass = componentFactory.getComponentClass( componentName );
+                        return that.canAcceptChildComponentName(componentName) && componentClass && componentClass.canBeChildOfComponentName('layout_row');
+                    },
                 // accept : function(draggable){
                 //     console.log( draggable );
                 // },
@@ -134,10 +134,11 @@ const LayoutRow = BaseComponent.extend(
                 drop : function(e, ui){
                     let $draggable = ui.draggable;
                     let componentId = $draggable.attr('data-glpb-com-id');
+                    let componentName = $draggable.attr('data-com-name');
                     if( ! componentId ){
 
                         e.stopPropagation();
-                        that.addColumn();
+                        that.addComponent( componentName );
                     }else if( componentId ){
                         //添加已有的组件到内部
                         e.stopPropagation();
@@ -159,7 +160,7 @@ const LayoutRow = BaseComponent.extend(
         },
 
         canAcceptChildComponentName : function(componentName){
-            return [ 'layout_column' ].indexOf(componentName) >= 0;
+            return true;
         },
 
         insertChildDOM : function(component, index){

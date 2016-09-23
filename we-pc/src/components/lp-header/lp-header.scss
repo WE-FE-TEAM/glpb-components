@@ -1,0 +1,41 @@
+
+.glpb-com-glpb_we_com_pc_lp_header{
+
+  background: #fff;
+
+  .glpb-content{
+    position: relative;
+    width: 980px;
+    margin: 0 auto;
+  }
+
+  .we-logo{
+
+  }
+
+  .we-contact{
+    position: absolute;
+    top: 55px;
+    right: 0;
+    color: #a2a2a2;
+    line-height: 24px;
+
+    .user-abs{
+
+      a{
+        color: #f74a45;
+        text-decoration: none;
+      }
+    }
+
+    .contact-us{
+      font-family: HelveticaNeueLt;
+      font-size: 22px;
+      font-weight: 700;
+      color: #f74a45;
+      padding-left: 27px;
+      margin-left: 16px;
+      background: url(http://www.we.com/static/loadingpage/img/icon-phone_4f2929f.png) no-repeat scroll 0 center;
+    }
+  }
+}

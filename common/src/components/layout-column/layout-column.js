@@ -78,7 +78,7 @@ const LayoutColumn = BaseComponent.extend(
 
                     let componentName = $draggable.attr('data-com-name');
                     let componentClass = componentFactory.getComponentClass( componentName );
-                    return that.canAcceptChildComponentName(componentName) && componentClass && componentClass.canBeChildOfComponentName('glpb_we_com_swiper_item');
+                    return that.canAcceptChildComponentName(componentName) && componentClass && componentClass.canBeChildOfComponentName('layout_column');
                 },
                 greedy : true,
                 classes: {

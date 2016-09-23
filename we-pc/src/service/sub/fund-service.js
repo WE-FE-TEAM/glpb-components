@@ -14,7 +14,7 @@ const ServiceBase = require('./../service-base');
 
 const adapters = {};
 
-const MOBILE_URL_PREFIX = '/mo';
+const MOBILE_URL_PREFIX = '/pc';
 
 const apiConf = {
 
