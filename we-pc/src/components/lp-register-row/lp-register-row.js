@@ -1,7 +1,8 @@
 /**
- * LP页面顶部的header区域
+ * LP页面顶部的 注册区域通栏, 包含: 注册框, 通栏背景
  * Created by jess on 2016/9/22.
  */
+
 
 
 const glpbCommon = require('glpb-components-common');
@@ -9,7 +10,7 @@ const glpbCommon = require('glpb-components-common');
 const DataManager = require('../../common/data-manager/data-manager.js');
 
 
-require('./lp-header.scss');
+require('./lp-register-row.scss');
 
 const BaseComponent = glpbCommon.BaseComponent;
 
@@ -18,13 +19,13 @@ const $ = BaseComponent.$;
 const utils = BaseComponent.utils;
 
 
-const tpl = `<div><div class="glpb-content"></div></div>`;
+const tpl = __inline('./lp-register-row.tpl');
 
 
 const LandingPageHeader = BaseComponent.extend(
     {
-        componentName : 'glpb_we_com_pc_lp_header',
-        componentNameZh : 'PC-LP-header',
+        componentName : 'glpb_we_com_pc_lp_register_row',
+        componentNameZh : 'PC-LP-注册通栏',
         componentCategory : BaseComponent.CATEGORY.UI,
         platform : BaseComponent.PLATFORM.PC,
         canBeChildOfComponentName : function(){
@@ -35,9 +36,11 @@ const LandingPageHeader = BaseComponent.extend(
         getDefaultStyle : function(){
             return {
                 background : {
-                    backgroundColor : '#fff'
+                    backgroundImage : 'http://www.we.com/cms/5788c3322fc6cb3b46b9e7e2/glpb/lp/lp-banner.jpg',
+                    backgroundColor : '#f4452b',
+                    backgroundPosition : 'center 0'
                 },
-                height : '100px',
+                height : '491px',
                 width : 'auto',
                 padding : '0',
                 margin : '0 auto'
@@ -47,10 +50,7 @@ const LandingPageHeader = BaseComponent.extend(
         getDefaultData : function(){
             return {
                 "logoImageURL_$$comment" : '公司logo图片的URL',
-                logoImageURL : 'http://www.we.com/static/loadingpage/img/logo-new-two_d0e7702.png',
-                logoImageWidth : '517px',
-                logoImageHeight : '49px',
-                logoImageTop : '36px'
+                logoImageURL : 'http://www.we.com/static/loadingpage/img/logo-new-two_d0e7702.png'
             };
         },
 
@@ -73,50 +73,25 @@ const LandingPageHeader = BaseComponent.extend(
             this.$el = $el;
             this.$content = $content;
             
-            let html = `<a href="/"><img style="width:${data.logoImageWidth}; height:${data.logoImageHeight}; margin-top:${data.logoImageTop};" class="we-logo" src="${data.logoImageURL}" alt="logo" /></a>
-<div class="we-contact">
-<span class="user-abs">已有账号？<a href="/loginPage.action">立即登录</a></span>
-<strong class="contact-us">400-090-6600</strong>
-</div>
-`;
 
-            $content.html( html );
-
-            this.$userAbs = $content.find('.user-abs');
 
         },
 
         bindComponentEvent : function(){
             let that = this;
             let data = this.data || {};
+
             if( this.isProductionMode() && ! this.eventBinded ){
                 //正式环境才绑定事件, 并且Ajax请求
-                let dataManager = DataManager.getInstance();
 
                 let querySign = this.querySign = utils.generateQuerySign();
 
-                dataManager.getUserInfo( )
-                    .then( ( user ) => {
 
-                        if( querySign !== that.querySign ){
-                            return;
-                        }
-
-                        if( user ){
-                            //当前用户已登录
-                            let html = `您好，<a href="/pc/user/account/home/myAccount">${user.displayName}</a>`;
-                            that.$userAbs.html( html );
-                        }
-                    })
-                    .catch( (e) => {
-                        console.warn( e );
-                    });
             }
         },
 
         componentWillUnmount : function(){
             this.querySign = null;
-            this.$userAbs = null;
             this.$content = null;
         }
 

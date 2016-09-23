@@ -1,0 +1,255 @@
+
+@import "../../scss-common/_helper.scss";
+
+.glpb-com-glpb_we_com_pc_lp_register_box{
+
+  @include box-sizing(border-box);
+
+  *{
+    @include box-sizing(border-box);
+  }
+
+  .glpb-content{
+    position: relative;
+    height: 100%;
+    padding: 0 30px;
+  }
+
+  //头部
+  .hd{
+    height: 85px;
+    font-size: 20px;
+    color: #282828;
+
+    .minsheng-host{
+      margin: 0 0 0 11px;
+      padding: 0 0 0 10px;
+      font-size: 14px;
+      color: #3a84cf;
+      border-left: 1px solid #e6e6e6;
+    }
+  }
+
+  .step-container{
+    position: relative;
+    width: 290px;
+    height: 362px;
+    margin: 0 auto;
+  }
+
+  .step-item{
+    position: absolute;
+    width: 100%;
+  }
+
+  //第一步form表单
+  .step-1{
+
+    width: 290px;
+
+    .register-icon{
+      position: absolute;
+      width: 43px;
+      height: 42px;
+      left:1px ;
+      top:1px;
+      overflow: hidden;
+      background: url(./assets/input-icon-all.png) scroll no-repeat 0 0;
+      -webkit-border-radius:6px 0 0 6px;
+      -moz-border-radius:6px 0 0 6px;
+      border-radius:6px 0 0 6px;
+    }
+
+    .gui-input-wrap{
+      padding:0;
+      border:1px solid #78828c;
+
+      &:hover{
+        border-color: #3a84cf;
+      }
+    }
+
+    .gui-form-text-error{
+      .gui-input-wrap{
+        border-color: #ee7565;
+      }
+    }
+
+    .gui-form-input{
+      width: 215px;
+      height: 42px;
+      line-height:42px;
+      padding:0 0 0 55px;
+    }
+
+    .gui-form-placeholder{
+      line-height:43px;
+      padding:0;
+      left: 55px;
+      color: #666;
+    }
+
+    .register-item-con{
+      margin-top: 18px;
+    }
+
+    //用户昵称
+    .nick-name-con{
+
+      margin-top: 14px;
+
+      input{
+
+      }
+
+      .placeholder{
+
+      }
+
+      .register-icon{
+        background-position: center -133px;
+      }
+    }
+
+    //手机号码
+    .mobile-phone-con{
+
+      .register-icon{
+        background-position: center -630px;
+      }
+    }
+
+    //密码
+    .password-con{
+
+      .register-icon{
+        background-position: center -415px;
+      }
+    }
+
+    //手机验证码区域
+    .phone-code-wrap{
+
+      margin-top: 19px;
+
+      .rand-code-con{
+        float: left;
+        width: 110px;
+
+        .gui-input-wrap{
+          width: 68px;
+          padding:0 20px;
+          -moz-border-radius: 3px;
+          -webkit-border-radius: 3px;
+          border-radius: 3px;
+
+          input{
+            width: 68px;
+            padding: 0;
+          }
+
+          .gui-form-placeholder{
+            left: 20px;
+          }
+        }
+
+        .gui-form-error-info{
+          right: 120px;
+        }
+      }
+
+      .code-image-con{
+        float: left;
+        margin-left: 20px;
+      }
+    }
+
+    //同意协议
+    .agreement-wrap{
+
+      .register-agree-con{
+        display: block;
+        height: 22px;
+        font-size:12px;
+
+        .checkbox-holder{
+          padding:2px 0 2px 20px;
+        }
+
+        .gui-form-error-info{
+          top: -7px;
+        }
+      }
+    }
+
+    //错误提示时
+    .validate-error-con{
+
+      //错误提示的容器
+      .gui-form-error-info{
+        position: absolute;
+        right: 300px;
+        height: 35px;
+        line-height: 35px;
+        font-size: 14px;
+        padding: 0 10px;
+        color: #666;
+        background-color: #fff;
+        white-space: nowrap;
+        left: auto;
+        top: 3px;
+        -moz-border-radius: 3px;
+        -webkit-border-radius: 3px;
+        border-radius: 3px;
+
+        &:after{
+          position: absolute;
+          content: '';
+          top: 50%;
+          right: -5px;
+          margin-top: -5px;
+          height: 0;
+          font-size: 0;
+          line-height: 0;
+          border-style: solid;
+          border-width: 5px 0 5px 5px;
+          border-color: transparent #fff;
+        }
+      }
+    }
+
+
+    //提交按钮
+    .submit-btn{
+      display: block;
+      width: 100%;
+      height:40px;
+      line-height:40px;
+      margin: 15px auto 0;
+      cursor: pointer;
+      font-size: 18px;
+      //background-color: #2ea7e0;
+      color: #fff;
+      padding-left: 0;
+      text-align: center;
+
+      &:hover{
+        //background: #2996c9;
+      }
+    }
+
+    .submit-error-info{
+      color: #f00;
+      text-align: center;
+    }
+  }
+
+  //注册第二部
+  .step-2{
+    display: none;
+    position: absolute;
+    left: 100%;
+    top: 0;
+  }
+
+}

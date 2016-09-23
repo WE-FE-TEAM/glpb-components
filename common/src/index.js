@@ -7,6 +7,11 @@
 const $ = window.jQuery;
 
 const utils = require('./utils/utils.js');
+
+const rsaCrypt = require('./rsa/rsaCrypt.js');
+
+const ValidateProvider = require('./ValidateProvider/ValidateProvider.js');
+
 const BaseComponent = require('./base/base.js');
 const factory = require('./component-factory/component-factory.js');
 const LayoutRow = require('./components/layout-row/layout-row.js');
@@ -20,6 +25,8 @@ const RichText = require('./components/glpb-rich-text/glpb-rich-text.js');
 
 
 module.exports = {
+    rsaCrypt,
+    ValidateProvider,
     utils,
     BaseComponent,
     factory : factory,

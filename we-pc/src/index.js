@@ -15,6 +15,10 @@ const ExchangeItemList = require('./components/exchange-item-list/exchange-item-
 
 const LandingPageHeader = require('./components/lp-header/lp-header.js');
 
+const LandingPageRegisterBox = require('./components/lp-register-box/lp-register-box.js');
+
+const LandingPageRegisterRow = require('./components/lp-register-row/lp-register-row.js');
+
 
 
 
@@ -24,5 +28,7 @@ const LandingPageHeader = require('./components/lp-header/lp-header.js');
 module.exports = {
     DataManager,
     ExchangeItemList,
-    LandingPageHeader
+    LandingPageHeader,
+    LandingPageRegisterBox,
+    LandingPageRegisterRow
 };
