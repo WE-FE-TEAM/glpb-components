@@ -82,6 +82,7 @@ const LandingPageHeader = BaseComponent.extend(
 
             $content.html( html );
 
+            this.$logo = $content.find('.we-logo');
             this.$userAbs = $content.find('.user-abs');
 
         },
@@ -112,6 +113,17 @@ const LandingPageHeader = BaseComponent.extend(
                         console.warn( e );
                     });
             }
+        },
+
+        setData : function( data ){
+            this.data = $.extend( {}, this.data, data );
+            data = this.data;
+
+            this.$logo.attr('src', data.logoImageURL).css({
+                width : data.logoImageWidth,
+                height : data.logoImageHeight,
+                marginTop : data.logoImageTop
+            });
         },
 
         componentWillUnmount : function(){

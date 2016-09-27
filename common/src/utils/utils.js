@@ -146,3 +146,40 @@ singleton.rem2px = function(remNumber){
     remNumber = remNumber || 0;
     return remNumber * 100;
 };
+
+
+/////////////////解析URL参数///////////
+singleton.query2json = function( s ){
+    s = s.replace(/^\?/,'');
+    var out = {};
+    var arr = s.split('&');
+    for( var i = 0, len = arr.length; i < len; i++ ){
+        var temp = arr[i];
+        var tempArr = temp.split('=');
+        if( tempArr.length === 2 ){
+            try{
+                out[ tempArr[0] ] = decodeURIComponent( tempArr[1] );
+            }catch(e){}
+        }
+    }
+
+    return out;
+};
+
+singleton.json2query = function( data ){
+    var out = '';
+    if( data ){
+        for( var i in data ){
+            if( data.hasOwnProperty(i) ){
+                out += i + '=' + encodeURIComponent( data[i] ) + '&';
+            }
+        }
+    }
+
+    return out;
+};
+
+
+singleton.getSearchConf = function(){
+    return singleton.query2json( location.search );
+};

@@ -1,0 +1,44 @@
+
+.gui-phone-code-image-con{
+  display: inline-block;
+  position: relative;
+  width: 140px;
+
+  .code-image-wrap{
+    position: absolute;
+    height: 43px;
+    width: 110px;
+    left: 0;
+    top: 0;
+    border: 1px solid #78828c;
+    text-align: center;
+    background-color: #fff;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+
+    img{
+      width: 70px;
+      height: 30px;
+      margin-top: 6px;
+      border:0 none;
+    }
+  }
+
+  &.img-clickable{
+
+    .code-image-wrap{
+      cursor: pointer;
+    }
+  }
+
+  .refresh-btn{
+    position: absolute;
+    height: 45px;
+    width: 25px;
+    top: 0;
+    right: 0;
+    cursor: pointer;
+    background: url(./assets/refresh.png??__inline) scroll no-repeat center center;
+  }
+}

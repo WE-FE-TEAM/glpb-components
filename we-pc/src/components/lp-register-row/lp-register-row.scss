@@ -2,11 +2,17 @@
 .glpb-com-glpb_we_com_pc_lp_register_row{
 
 
-  .glpb-content{
+  &>.glpb-content{
     position: relative;
     width: 1080px;
     height: 100%;
     margin: 0 auto;
+
+    .glpb-com-glpb_we_com_pc_lp_register_box{
+      position: absolute;
+      top: 20px;
+      right: 0;
+    }
   }
 
 }

@@ -168,7 +168,7 @@ $.extend( TextInput.prototype, {
 
         this.setState({
             invalidMessageList : list,
-            value : this.refs.input.value
+            value : this.$input.val()
         });
 
         this.props.onValidateEnd( this.props.name, list );
@@ -176,7 +176,7 @@ $.extend( TextInput.prototype, {
 
     handleBlur : function(e){
         var list = this._doValidate( VALIDATE_BLUR );
-        var value = this.refs.input.value.trim();
+        var value = this.$input.val().trim();
         var isShowPlaceholder = value === '';
 
 
@@ -209,24 +209,6 @@ $.extend( TextInput.prototype, {
     //是否浏览器原生支持 placeholder
     isSupportPlaceholder : function(){
         return false;
-    },
-
-    //渲染 placeholder
-    renderPlaceholder : function(){
-        if( this.props.placeholder && ! this.isSupportPlaceholder() ){
-
-            let style = {};
-
-            if( this.state.isShowPlaceholder ){
-                style.display = 'block';
-            }else{
-                style.display = 'none';
-            }
-
-            return <div style={style} onClick={this.handlePlaceholderClick} className={PLACEHOLDER_CLASS}>{this.props.placeholder}</div>;
-        }
-
-        return null;
     },
 
     render : function(){
@@ -277,10 +259,10 @@ $.extend( TextInput.prototype, {
     },
 
     bindEvent : function(){
-        this.$placeholder.on('click', this.handlePlaceholderClick, false );
-        this.$input.on('focus', this.handleFocus, false );
-        this.$input.on('change', this.handleValueUpdate, false );
-        this.$input.on('blur', this.handleBlur, false);
+        this.$placeholder.on('click', this.handlePlaceholderClick );
+        this.$input.on('focus', this.handleFocus );
+        this.$input.on('change', this.handleValueUpdate );
+        this.$input.on('blur', this.handleBlur);
     },
 
     //每次在 state 改变时, 调用此方法更新组件展示
@@ -299,14 +281,20 @@ $.extend( TextInput.prototype, {
             this.$el.removeClass( containerErrorClass );
         }
 
+        if( this.state.isShowPlaceholder ){
+            this.$placeholder.show();
+        }else{
+            this.$placeholder.hide();
+        }
+
         return this;
     },
 
     destroy : function(){
-        this.$placeholder.off('click', this.handlePlaceholderClick, false );
-        this.$input.off('focus', this.handleFocus, false );
-        this.$input.off('change', this.handleValueUpdate, false );
-        this.$input.off('blur', this.handleBlur, false);
+        this.$placeholder.off('click', this.handlePlaceholderClick );
+        this.$input.off('focus', this.handleFocus );
+        this.$input.off('change', this.handleValueUpdate );
+        this.$input.off('blur', this.handleBlur);
 
         this.$input = null;
         this.$placeholder = null;

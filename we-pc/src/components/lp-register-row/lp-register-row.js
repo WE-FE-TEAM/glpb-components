@@ -9,6 +9,8 @@ const glpbCommon = require('glpb-components-common');
 
 const DataManager = require('../../common/data-manager/data-manager.js');
 
+const RegisterBox = require('../lp-register-box/lp-register-box.js');
+
 
 require('./lp-register-row.scss');
 
@@ -54,6 +56,15 @@ const LandingPageHeader = BaseComponent.extend(
             };
         },
 
+        getDefaultComponents : function(){
+
+            return [
+                {
+                    componentName : 'glpb_we_com_pc_lp_register_box'
+                }
+            ];
+        },
+
         init : function(){
             //当前Ajax请求的ID
             this.querySign = null;
@@ -72,8 +83,22 @@ const LandingPageHeader = BaseComponent.extend(
 
             this.$el = $el;
             this.$content = $content;
-            
 
+            let components = this.components || [];
+            let componentRefs = this.componentRefs;
+            for( var i = 0, len = components.length; i < len; i++ ){
+                let config = components[i];
+                config.parentId = currentComponentId;
+                let com = this.page.createComponentInstance( config );
+                if( com ){
+                    com.render();
+                    $content.append( com.$getElement() );
+                    componentRefs.push( com );
+                }else{
+                    //不存在该组件
+                    throw new Error(`componentName[${config.componentName}]对应的组件不存在!!`);
+                }
+            }
 
         },
 
