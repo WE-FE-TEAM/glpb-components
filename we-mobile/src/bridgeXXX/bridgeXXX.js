@@ -163,7 +163,7 @@ var bridgeXXX = {
             }));
         } catch (_error) {}
     },
-    
+
     /**
      * 打开 基金详情页
      * @param fundCode {String} 基金code
@@ -230,7 +230,7 @@ var bridgeXXX = {
     showExchangeDetailPage : function( productId ){
         let url = 'renrendaiInvestment://app.we.com/exchange/detail?productNo=' + encodeURIComponent( productId );
         location.href = url;
-    }
+    },
 
     /**
      * 调用APP提示框
