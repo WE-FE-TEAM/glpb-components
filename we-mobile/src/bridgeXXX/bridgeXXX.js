@@ -116,12 +116,14 @@ var bridgeXXX = {
             return bridge.callHandler('clientLogin');
         } catch (_error) {}
     },
+
     //打开Home
     showHomePage : function(){
         try {
             return bridge.callHandler('clientHome');
         } catch (_error) {}
     },
+
     /**
      * 通过APP分享
      * @param data {Object}
@@ -131,20 +133,22 @@ var bridgeXXX = {
      * @param data.link {String} 分享的链接
      * @returns {*}
      */
-    share : function( data ){
+    share : function( data, callback ){
         try {
             return bridge.callHandler('clientShare', JSON.stringify({
                 title: data.title,
                 desc: data.desc,
                 img: data.img_url,
                 url: data.link
-            }));
+            }),function(response){
+                if(typeof callback === 'function'){
+                    callback(response);
+                }
+            });
         } catch (_error) {
             return false;
         }
     },
-
-
 
 
     /**
@@ -228,6 +232,23 @@ var bridgeXXX = {
         location.href = url;
     }
 
+    /**
+     * 调用APP提示框
+     * @param {object} data 信息和按钮文案、id
+     * @param {function} callback 回调函数
+     */
+    showAlert : function( data, callback ){
+        try {
+            return bridge.callHandler('showAlert', JSON.stringify({
+                message: data.message,
+                buttonInfos: data.buttonInfos
+            }),function(response){
+                if( typeof callback === "function" ){
+                    callback(response);
+                }
+            });
+        } catch (_error) {}
+    }
 };
 
 
