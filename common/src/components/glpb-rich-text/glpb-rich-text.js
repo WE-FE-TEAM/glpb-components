@@ -37,7 +37,7 @@ const RichText = ComponentBase.extend(
                 lineHeight : '1.5',
                 color : '#000',
                 background : {
-                    backgroundColor : '#fff'
+                    backgroundColor : 'transparent'
                 },
                 textAlign : 'left',
                 animation : 'none'
@@ -69,7 +69,7 @@ const RichText = ComponentBase.extend(
 
             $content.css( cssStyle );
 
-            $content.html( data );
+            this.setData( data );
 
         },
 
@@ -87,7 +87,9 @@ const RichText = ComponentBase.extend(
 
         setData : function(data){
             this.data = data || '';
-            this.$content.html( this.data );
+            //处理HTML中可能包含的系统定义的变量
+            data = utils.translateString( this.data );
+            this.$content.html( data );
         },
 
         componentWillUnmount : function(){

@@ -183,3 +183,17 @@ singleton.json2query = function( data ){
 singleton.getSearchConf = function(){
     return singleton.query2json( location.search );
 };
+
+
+const tplData = window.glpbCommonConstants || {};
+/**
+ * 提供字符串内变量替换功能, 只能替换系统支持的几个, 从 window.glpbCommonConstants 行获取值 
+ * @param str {string} 可能包含系统变量的字符串
+ * @returns {string}
+ */
+singleton.translateString = function( str ){
+    str = str || '';
+    return str.replace(/\$\$([0-9a-zA-Z_]+)\$\$/g, function( s1, key){
+        return tplData[key] || '';
+    } );
+};
