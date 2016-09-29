@@ -21,6 +21,8 @@ var readyCallbackQueue = [];
 
 let userAgent = navigator.userAgent || '';
 let out = /WEAPP\/(\d+)/i.exec(userAgent);
+let isAndroid = userAgent.indexOf('Android') > -1 || userAgent.indexOf('Adr') > -1;
+let isIOS = !!userAgent.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/);
 
 //是否在WE理财APP内
 let isWeAPP = false;
@@ -57,6 +59,21 @@ var bridgeXXX = {
     },
 
     init : function(){
+
+        var callback = noop;
+
+        //IOS 4.3以上版本需要执行以下初始化代码
+        if(weAppVersion >= 40300 && isIOS){
+            if (window.WebViewJavascriptBridge) { return callback(WebViewJavascriptBridge); }
+            if (window.WVJBCallbacks) { return window.WVJBCallbacks.push(callback); }
+
+            window.WVJBCallbacks = [callback];
+            var WVJBIframe = document.createElement('iframe');
+            WVJBIframe.style.display = 'none';
+            WVJBIframe.src = 'wvjbscheme://__BRIDGE_LOADED__';
+            document.documentElement.appendChild(WVJBIframe);
+            setTimeout(function() { document.documentElement.removeChild(WVJBIframe) }, 0);
+        }
         bridgeXXX.ready( noop );
     },
 
@@ -71,7 +88,7 @@ var bridgeXXX = {
         }
 
         readyCallbackQueue.push( callback );
-        
+
         if( window.WebViewJavascriptBridge ){
             bridgeReady( window.WebViewJavascriptBridge );
         }else if( ! isReadyBind ){
@@ -105,7 +122,6 @@ var bridgeXXX = {
     //打开APP的注册页
     showRegisterPage : function(){
         try {
-
             return bridge.callHandler('clientRegister');
         } catch (_error) {}
     },
@@ -133,7 +149,29 @@ var bridgeXXX = {
      * @param data.link {String} 分享的链接
      * @returns {*}
      */
-    share : function( data, callback ){
+    share : function( data ){
+        try {
+            return bridge.callHandler('clientShare', JSON.stringify({
+                title: data.title,
+                desc: data.desc,
+                img: data.img_url,
+                url: data.link
+            }));
+        } catch (_error) {
+            return false;
+        }
+    },
+
+    /**
+     * 通过APP分享,这个是带回调的，避免对旧版本app产生影响，新加一个方法
+     * @param data {Object}
+     * @param data.title {String}
+     * @param data.desc {String}
+     * @param data.img_url {String} 分享出去的小图片URL
+     * @param data.link {String} 分享的链接
+     * @returns {*}
+     */
+    shareWithCallback : function( data , callback ){
         try {
             return bridge.callHandler('clientShare', JSON.stringify({
                 title: data.title,
@@ -230,29 +268,10 @@ var bridgeXXX = {
     showExchangeDetailPage : function( productId ){
         let url = 'renrendaiInvestment://app.we.com/exchange/detail?productNo=' + encodeURIComponent( productId );
         location.href = url;
-    },
-
-    /**
-     * 调用APP提示框
-     * @param {object} data 信息和按钮文案、id
-     * @param {function} callback 回调函数
-     */
-    showAlert : function( data, callback ){
-        try {
-            return bridge.callHandler('showAlert', JSON.stringify({
-                message: data.message,
-                buttonInfos: data.buttonInfos
-            }),function(response){
-                if( typeof callback === "function" ){
-                    callback(response);
-                }
-            });
-        } catch (_error) {}
     }
+
 };
 
 
 
 module.exports = bridgeXXX;
-
-
