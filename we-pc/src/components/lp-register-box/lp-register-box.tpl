@@ -1,4 +1,5 @@
 <div>
+    <div class="reg-box-bg"></div>
     <div class="glpb-content">
         <h2 class="hd">注册<span class="minsheng-host">资金由民生银行托管</span></h2>
         <div class="step-container">

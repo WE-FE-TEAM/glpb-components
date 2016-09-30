@@ -11,6 +11,8 @@ const $ = glpbCommon.$;
 const ValidateProvider = glpbCommon.ValidateProvider;
 
 const TextInput = require('./text-input/text-input.js');
+const RandCodeImage = require('./rand-code-image/rand-code-image.js');
+const Checkbox = require('./checkbox/checkbox.js');
 
 
 
@@ -140,7 +142,7 @@ $.extend( GForm.prototype, {
     },
 
     bindEvent : function(){
-        this.$el.on('submit', this.handleSubmit, false);
+        this.$el.on('submit', this.handleSubmit);
         
         let arr = this.children || [];
         for( let i  = 0, len = arr.length; i < len; i++ ){
@@ -172,15 +174,18 @@ $.extend( GForm.prototype, {
         this.children = [];
         this.fieldRefs = [];
 
-        this.$el.off('submit', this.handleSubmit, false);
+        this.$el.off('submit', this.handleSubmit);
         this.$el = null;
     }
 
 } );
 
 
-GForm.TextInput = TextInput;
 GForm.ValidateProvider = ValidateProvider;
+
+GForm.TextInput = TextInput;
+GForm.RandCodeImage = RandCodeImage;
+GForm.Checkbox = Checkbox;
 
 
 module.exports = GForm;

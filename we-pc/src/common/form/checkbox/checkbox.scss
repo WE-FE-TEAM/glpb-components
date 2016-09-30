@@ -1,0 +1,19 @@
+
+.gui-form-checkbox{
+
+  position: relative;
+
+  .checkbox-holder{
+    padding-left: 20px;
+    background: url(./assets/uncheck-3.png?__inline) scroll no-repeat left center;
+    cursor: default;
+  }
+
+  &.gui-form-checkbox-checked{
+
+    .checkbox-holder{
+      background-image: url(./assets/checked-3.png?__inline);
+    }
+
+  }
+}

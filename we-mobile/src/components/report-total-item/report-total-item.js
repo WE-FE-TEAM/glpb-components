@@ -1,18 +1,20 @@
 /**
- * LP页面顶部的 注册区域通栏, 包含: 注册框, 通栏背景
- * Created by jess on 2016/9/22.
+ * 季报中, 用于显示 总交易金额/为用户赚取/累计交易/A轮融资 等单个信息的组件
+ * Created by jess on 2016/9/28.
  */
 
 
 
+
+const moment = require('moment');
+
+const numeral = require('numeral');
+
 const glpbCommon = require('glpb-components-common');
 
-const DataManager = require('../../common/data-manager/data-manager.js');
+const serviceFactory = require('../../service/service-factory.js');
 
-const RegisterBox = require('../lp-register-box/lp-register-box.js');
-
-
-require('./lp-register-row.scss');
+require('./report-total-item.scss');
 
 const BaseComponent = glpbCommon.BaseComponent;
 
@@ -21,15 +23,16 @@ const $ = BaseComponent.$;
 const utils = BaseComponent.utils;
 
 
-const tpl = __inline('./lp-register-row.tpl');
+const tpl = `<div><div class="glpb-content"></div></div>`;
 
 
-const LandingPageHeader = BaseComponent.extend(
+
+const ReportTotalItem = BaseComponent.extend(
     {
-        componentName : 'glpb_we_com_pc_lp_register_row',
-        componentNameZh : 'PC-LP-注册通栏',
+        componentName : 'glpb_m_we_com_report_total_item',
+        componentNameZh : '总交易金额区块',
         componentCategory : BaseComponent.CATEGORY.UI,
-        platform : BaseComponent.PLATFORM.PC,
+        platform : BaseComponent.PLATFORM.MOBILE,
         canBeChildOfComponentName : function(){
             return true;
         }
@@ -38,29 +41,39 @@ const LandingPageHeader = BaseComponent.extend(
         getDefaultStyle : function(){
             return {
                 background : {
-                    backgroundImage : 'http://www.we.com/cms/5788c3322fc6cb3b46b9e7e2/glpb/lp/lp-banner.jpg',
-                    backgroundColor : '#f4452b',
-                    backgroundPosition : 'center 0'
+                    backgroundColor : 'transparent'
                 },
-                height : '491px',
-                width : 'auto',
-                padding : '0',
-                margin : '0 auto'
+                height: '2.7rem',
+                padding : '0.63rem 0 0 0.92rem',
+                margin : '0'
             };
         },
 
         getDefaultData : function(){
             return {
-                "logoImageURL_$$comment" : '公司logo图片的URL',
-                logoImageURL : 'http://www.we.com/static/loadingpage/img/logo-new-two_d0e7702.png'
+                "exchangeIdList_$$comment" : '输入要显示的多个交易所ID',
+                exchangeIdList : []
             };
         },
 
         getDefaultComponents : function(){
-
             return [
                 {
-                    componentName : 'glpb_we_com_pc_lp_register_box'
+                    componentName : 'glpb_rich_text',
+                    data : '205亿元',
+                    style : {
+                        color : '#fff',
+                        fontSize : '15px',
+                        marginBottom : '0.06rem'
+                    }
+                },
+                {
+                    componentName : 'glpb_rich_text',
+                    data : '总交易金额',
+                    style : {
+                        color : '#fff',
+                        fontSize : '13px'
+                    }
                 }
             ];
         },
@@ -69,7 +82,6 @@ const LandingPageHeader = BaseComponent.extend(
             //当前Ajax请求的ID
             this.querySign = null;
             //是否已经绑定了组件自定义事件
-            this.eventBinded = false;
         },
 
         render : function(){
@@ -78,7 +90,7 @@ const LandingPageHeader = BaseComponent.extend(
 
             let cssClass = this.getBaseCssClass() + '  ';
             let cssStyle = this.translateStyle( this.style );
-            let $el = $(tpl).addClass( cssClass ).css( cssStyle );
+            let $el = $(tpl).addClass( cssClass ).css( cssStyle );;
             let $content = $('.glpb-content', $el);
 
             this.$el = $el;
@@ -102,21 +114,7 @@ const LandingPageHeader = BaseComponent.extend(
 
         },
 
-        bindComponentEvent : function(){
-            let that = this;
-            let data = this.data || {};
-
-            if( this.isProductionMode() && ! this.eventBinded ){
-                //正式环境才绑定事件, 并且Ajax请求
-
-                let querySign = this.querySign = utils.generateQuerySign();
-
-
-            }
-        },
-
         componentWillUnmount : function(){
-            this.querySign = null;
             this.$content = null;
         }
 
@@ -125,5 +123,6 @@ const LandingPageHeader = BaseComponent.extend(
 );
 
 
-module.exports = LandingPageHeader;
+module.exports = ReportTotalItem;
+
 

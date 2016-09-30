@@ -20,7 +20,11 @@ const $ = BaseComponent.$;
 
 const utils = BaseComponent.utils;
 
+const Cookies = glpbCommon.Cookies;
+
 const TextInput = GForm.TextInput;
+const RandCodeImage = GForm.RandCodeImage;
+const Checkbox = GForm.Checkbox;
 
 
 const tpl = __inline('./lp-register-box.tpl');
@@ -39,9 +43,6 @@ const LandingPageHeader = BaseComponent.extend(
     {
         getDefaultStyle : function(){
             return {
-                background : {
-                    backgroundColor : '#fff'
-                },
                 height : '440px',
                 width : '350px',
                 padding : '0',
@@ -52,7 +53,15 @@ const LandingPageHeader = BaseComponent.extend(
         getDefaultData : function(){
             return {
                 "logoImageURL_$$comment" : '公司logo图片的URL',
-                logoImageURL : 'http://www.we.com/static/loadingpage/img/logo-new-two_d0e7702.png'
+                logoImageURL : 'http://www.we.com/static/loadingpage/img/logo-new-two_d0e7702.png',
+                promotion : '',
+                inviteCode : '',
+                type : '',
+                intention : 'LENDER',
+                submitText : '注册领红包',
+                submitBtnTheme: 'blue',
+                boxBackgroundColor : '#fff',
+                boxBackgroundOpacity : '.8'
             };
         },
 
@@ -63,6 +72,31 @@ const LandingPageHeader = BaseComponent.extend(
             this.eventBinded = false;
 
             this.handleStep1Submit = this.handleStep1Submit.bind( this );
+
+            //获取promotion和inviteCode
+            let searchConf = utils.getSearchConf();
+
+            let data = this.data;
+
+            if( ! data.promotion ){
+                let promotion = searchConf.promotion || searchConf.utmSource || '';
+
+                if( ! promotion || ! /[-a-zA-Z0-9?=_/]{1,128}/.test(promotion) ){
+                    //从 promotion_source  这个cookie中读取
+                    promotion = Cookies.get('promotion_source', { path: '/' });
+                }
+
+                data.promotion = promotion || '';
+            }
+
+            if( data.promotion ){
+                //写入cookie中
+                Cookies.set('promotion_source', data.promotion, { path: '/', expires : 365 });
+            }
+
+            if( ! data.inviteCode ){
+                data.inviteCode = searchConf.inviteCode || '';
+            }
         },
 
         render : function(){
@@ -75,12 +109,16 @@ const LandingPageHeader = BaseComponent.extend(
             let $content = $('.glpb-content', $el);
 
             this.$el = $el;
+            this.$boxBg = $el.find('.reg-box-bg');
             this.$content = $content;
             this.$stepContainer = $content.find('.step-container');
             this.$step1 = this.$stepContainer.find('.step-1');
             this.$step2 = this.$stepContainer.find('.step-2');
 
+
             this.renderStep1();
+
+            this.updateForm();
 
         },
 
@@ -189,19 +227,72 @@ const LandingPageHeader = BaseComponent.extend(
                         fn : 'isChecked',
                         message : 'agree'
                     } ]
-                }
+                },
+                children : '<a href="/agreement/rv_webservice.html" target="_blank">《人人贷WE理财注册服务协议》</a>'
             };
+
+            let $formElement = form.$getElement();
 
             //昵称
             let nickInput = new TextInput( nickNameProps );
             nickInput.render();
-            form.addElementItem(nickInput.$getElement()).addInputItem( nickInput );
+            form.addInputItem( nickInput );
+            $formElement.append( nickInput.$getElement() );
+
+            //手机号
+            let mobileInput = new TextInput( phoneProps );
+            mobileInput.render();
+            form.addInputItem( mobileInput );
+            $formElement.append( mobileInput.$getElement() );
 
             //密码
             let passInput = new TextInput( passwrodProps );
             passInput.render();
-            form.addElementItem(passInput.$getElement()).addInputItem( passInput );
+            form.addInputItem( passInput );
+            $formElement.append( passInput.$getElement() );
 
+            //验证码输入框
+            let randCodeInput = new TextInput( randCodeProps );
+            randCodeInput.render();
+            form.addInputItem( randCodeInput );
+            
+            //验证码图片
+            let randCodeImg = new RandCodeImage( codeImageProps );
+            randCodeImg.render();
+            form.addComponentItem( randCodeImg );
+
+            let $randCon = $('<div class="register-item-con phone-code-wrap fn-clear clearfix"></div>');
+            
+            $randCon.append( randCodeInput.$getElement() );
+            $randCon.append( randCodeImg.$getElement() );
+
+            form.addElementItem( $randCon );
+
+            //注册协议单选框
+            let checkbox = new Checkbox( checkboxProps );
+            checkbox.render();
+            form.addInputItem( checkbox );
+            let $itemBlock = $('<div class="register-item-con agreement-wrap"></div>');
+            $itemBlock.append( checkbox.$getElement() );
+
+            form.addElementItem( $itemBlock );
+
+            //提交按钮和其他隐藏域
+            let data = this.data;
+            let submitText = data.submitText || '注册领红包';
+            
+            let html = `<div><input type="hidden" name="lpjumptoreg" value="1" />
+                    <input type="hidden" name="type" value="${data.type}" />
+                    <input type="hidden" name="intention" value="${data.intention}" />
+                    <input type="hidden" name="promotion" value="${data.promotion}" />
+                    <input type="hidden" name="inviteCode" value="${data.inviteCode}" />
+                    <input type="submit" class="submit-btn" value="${submitText}" /></div>`;
+
+            let $remain = $(html);
+
+            this.$submitBtn = $remain.find('.submit-btn');
+
+            form.addElementItem( $remain );
 
             this.$step1.append( form.$getElement() );
         },
@@ -222,6 +313,36 @@ const LandingPageHeader = BaseComponent.extend(
         },
 
         handleStep1Submit : function(){},
+
+        setData : function(data){
+            this.data = $.extend( this.data, data );
+
+            this.updateForm();
+        },
+
+        updateForm : function(){
+            let data = this.data;
+
+            this.$boxBg.css({
+                backgroundColor : data.boxBackgroundColor,
+                opacity : data.boxBackgroundOpacity
+            });
+
+            this.$submitBtn.val( data.submitText || '注册领红包' );
+
+            let submitBtnClass = '';
+
+            switch( data.submitBtnTheme ){
+                case 'blue':
+                    submitBtnClass = 'submit-blue';
+                    break;
+                default:
+                    submitBtnClass = 'submit-blue';
+                    break;
+            }
+
+            this.$submitBtn.attr('class', 'submit-btn ' + submitBtnClass );
+        },
 
         componentWillUnmount : function(){
             this.form.destroy();

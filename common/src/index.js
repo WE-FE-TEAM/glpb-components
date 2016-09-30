@@ -8,6 +8,8 @@ const $ = window.jQuery;
 
 const utils = require('./utils/utils.js');
 
+const Cookies = require('./utils/js-cookie.js');
+
 const rsaCrypt = require('./rsa/rsaCrypt.js');
 
 const ValidateProvider = require('./ValidateProvider/ValidateProvider.js');
@@ -28,6 +30,7 @@ module.exports = {
     rsaCrypt,
     ValidateProvider,
     utils,
+    Cookies,
     BaseComponent,
     factory : factory,
     LayoutRow,

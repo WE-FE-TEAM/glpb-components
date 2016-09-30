@@ -1,6 +1,10 @@
 {
   "name": "glpb-we-mobile",
+<<<<<<< HEAD
   "version": "1.0.11",
+=======
+  "version": "1.0.10",
+>>>>>>> b2d7ef882a64b5fedbbfcec4b3c64fee979805eb
   "description": "mobile utils component of we.com",
   "main": "./src/index.js",
   "scripts": {
