@@ -32,7 +32,7 @@ function DataManager(initData){
 $.extend( DataManager.prototype, {
 
     //获取当前登录用户的信息
-    getUser : function(){
+    getUserInfo : function(){
         let data = this._data;
         if( data.hasOwnProperty('user') ){
             return Promise.resolve( data.user );

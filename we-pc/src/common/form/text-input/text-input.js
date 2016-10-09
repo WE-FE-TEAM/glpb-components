@@ -33,8 +33,6 @@ const PLACEHOLDER_CLASS = constant.PLACEHOLDER_CLASS;
 const ERROR_INFO_CLASS = constant.ERROR_INFO_CLASS;
 
 
-const tpl = __inline('./text-input.tpl');
-
 
 function TextInput(args){
 
@@ -238,13 +236,23 @@ $.extend( TextInput.prototype, {
             }
         }
 
+        let tpl = `<div class="gui-form-text-container">
+    <div class="gui-input-wrap">
+        <input id="${inputProps.id}" name="${inputProps.name}" value="${inputProps.value}" type="${inputProps.type}" autocomplete="${inputProps.autoComplete}" class="gui-form-input"  />
+        <div class="gui-form-placeholder" ></div>
+    </div>
+    <div class="gui-form-error-info"></div>
+
+</div>`;
+
         let $el = $(tpl);
         let $input = $el.find('input');
         let $placeholder = $el.find('.gui-form-placeholder');
         let $errorInfo = $el.find('.gui-form-error-info');
 
         $el.addClass( containerProps.className );
-        $input.attr( inputProps );
+        // FUCK IE8, 不能修改 input 的 type 属性!!!
+        // $input.attr( inputProps );
         $placeholder.html( placeholder );
         $errorInfo.html( errorTip );
 

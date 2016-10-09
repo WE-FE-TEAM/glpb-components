@@ -1,6 +1,6 @@
 {
   "name": "glpb-we-pc",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "pc utils component of we.com",
   "main": "./src/index.js",
   "scripts": {
