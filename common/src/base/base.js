@@ -9,6 +9,9 @@
 
 const $ = window.jQuery;
 const utils = require('../utils/utils.js');
+
+const StyleManager = require('../style-manager/style-manager.js');
+
 const componentFactory = require('../component-factory/component-factory.js');
 
 require('./base.scss');
@@ -49,6 +52,8 @@ function ComponentBase( args ){
 
     //将当前实例对象, 注册到全局
     componentFactory.addComponentInstance(this.componentId, this);
+
+    this.styleManager = StyleManager.getSharedInstance();
 
     this.init();
 }
@@ -96,6 +101,7 @@ $.extend( ComponentBase.prototype, {
     },
 
     updateCSSStyle : function( cssStyle ){
+        this.styleManager.update( '#' + this.componentId, cssStyle );
         this.$el.css( cssStyle );
     },
 

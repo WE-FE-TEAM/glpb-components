@@ -14,6 +14,8 @@ const rsaCrypt = require('./rsa/rsaCrypt.js');
 
 const ValidateProvider = require('./ValidateProvider/ValidateProvider.js');
 
+const StyleManager = require('./style-manager/style-manager.js');
+
 const BaseComponent = require('./base/base.js');
 const factory = require('./component-factory/component-factory.js');
 const LayoutRow = require('./components/layout-row/layout-row.js');
@@ -24,12 +26,15 @@ const Carousel = require('./components/glpb-carousel/glpb-carousel.js');
 
 const RichText = require('./components/glpb-rich-text/glpb-rich-text.js');
 
+const LinkButton = require('./components/link-button/link-button.js');
 
 
 module.exports = {
+    "$" : $,
     rsaCrypt,
     ValidateProvider,
     utils,
+    StyleManager,
     Cookies,
     BaseComponent,
     factory : factory,
@@ -38,5 +43,5 @@ module.exports = {
     Image,
     Carousel,
     RichText,
-    "$" : $
+    LinkButton
 };

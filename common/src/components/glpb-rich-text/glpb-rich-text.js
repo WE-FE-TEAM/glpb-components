@@ -67,7 +67,8 @@ const RichText = ComponentBase.extend(
             this.$el = $el;
             this.$content = $content;
 
-            $content.css( cssStyle );
+            // $content.css( cssStyle );
+            this.updateCSSStyle( cssStyle );
 
             this.setData( data );
 
@@ -80,9 +81,9 @@ const RichText = ComponentBase.extend(
             $el.append($editorSettingWrap);
         },
 
-        updateCSSStyle : function(style){
-
-            this.$content.css( style );
+        updateCSSStyle : function(cssStyle){
+            this.styleManager.update( '#' + this.componentId + '>.glpb-content', cssStyle );
+            // this.$content.css( style );
         },
 
         setData : function(data){

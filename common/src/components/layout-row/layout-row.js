@@ -49,7 +49,8 @@ const LayoutRow = BaseComponent.extend(
 
             let cssClass = this.getBaseCssClass() + '  ';
             let cssStyle = this.translateStyle( this.style );
-            let $el = $(tpl).addClass( cssClass ).css( cssStyle );
+            this.styleManager.update( '#' + this.componentId, cssStyle );
+            let $el = $(tpl).addClass( cssClass );
             let $content = $('.glpb-com-content', $el);
             this.$el = $el;
             this.$content = $content;
