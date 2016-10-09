@@ -268,6 +268,72 @@ var bridgeXXX = {
     showExchangeDetailPage : function( productId ){
         let url = 'renrendaiInvestment://app.we.com/exchange/detail?productNo=' + encodeURIComponent( productId );
         location.href = url;
+    },
+
+    /**
+     * 打开APP的U计划列表页
+     * @returns {*}
+     */
+    showUplanListPage : function(){
+        let url = 'renrendaiInvestment://app.we.com/uplan/list';
+        location.href = url;
+    },
+
+    /**
+     * 打开APP的U计划详情页
+     * @param productId {string} U计划ID
+     * @returns {*}
+     */
+    showUplanDetailPage : function( productId ){
+        let url = 'renrendaiInvestment://app.we.com/uplan/detail?fid=' + encodeURIComponent( productId );
+        location.href = url;
+    },
+
+
+    /**
+     * 打开APP的保险列表页
+     * @returns {*}
+     */
+    showInsuranceListPage : function(){
+        let url = 'renrendaiInvestment://app.we.com/insurance/list';
+        location.href = url;
+    },
+
+    /**
+     * 打开APP的保险详情页
+     * @param productId {string} 保险ID
+     * @returns {*}
+     */
+    showInsuranceDetailPage : function( productId ){
+        let url = 'renrendaiInvestment://app.we.com/insurance/detail?showProductId=' + encodeURIComponent( productId );
+        location.href = url;
+    },
+
+    /**
+     * 打开APP的保险角色选择页
+     * @returns {*}
+     */
+    showInsuranceRoleSelectPage : function(){
+        let url = 'renrendaiInvestment://app.we.com/insurance/role';
+        location.href = url;
+    },
+
+    /**
+     * 打开APP的保险推荐列表页
+     * @returns {*}
+     */
+    showInsuranceRecommendListPage : function(){
+        let url = 'renrendaiInvestment://app.we.com/insurance/recommend';
+        location.href = url;
+    },
+
+    /**
+     * 打开APP的新手专区页
+     * @returns {*}
+     */
+    showNewAreaPage : function(){
+        let url = 'renrendaiInvestment://app.we.com/newArea';
+        location.href = url;
     }
 
 };
