@@ -117,12 +117,16 @@ const SwiperContainer = BaseComponent.extend(
             let height = cssStyle.height;
             if( height === 'auto' ){
                 height = window.innerHeight || $(window).height();
+                if( ! this.isProductionMode() ){
+                    //CMS系统中, 这里获取到的window是最外层的,不是页面所在iframe的, 因此需要固定为 667 px
+                    height = 667;
+                }
                 cssStyle.height = height + 'px';
             }
             this.$swipeContainer.css( cssStyle );
-            this.$el.css({
-                height : height
-            });
+            // this.$el.css({
+            //     height : height
+            // });
         },
 
         canAcceptChildComponentName : function( componentName ){
