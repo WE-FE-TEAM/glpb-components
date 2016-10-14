@@ -47,6 +47,32 @@ function bridgeReady( handle ){
 }
 
 
+/**
+ * app 4.3 版本新增，这是为回调写的兼容代码，旧版本的android中，使用bridge.callHandler方法传3个参数会调用出错
+ * @param data
+ * @param shareCallback
+ * @param 兼容版本号
+ * @returns {*}
+ */
+function compatibleOldVer( handleName , data , callback , callbackName , version){
+    //兼容旧版本，不使用回调
+    if( version && version > weAppVersion ){
+        return bridge.callHandler(handleName, JSON.stringify(data));
+    }
+
+    if( isAndroid){
+        //android需要直接传递回调函数名
+        return bridge.callHandler(handleName, JSON.stringify(data),callbackName);
+    }else{
+        //ios可以直接传递回调函数
+        return bridge.callHandler(handleName, JSON.stringify(data),function(res){
+            if( typeof callback === 'function'){
+                callback(res);
+            }
+        });
+    }
+}
+
 var bridgeXXX = {
 
     //当前页面是否在 WE理财APP 内部加载
@@ -169,25 +195,24 @@ var bridgeXXX = {
      * @param data.desc {String}
      * @param data.img_url {String} 分享出去的小图片URL
      * @param data.link {String} 分享的链接
+     * @param callback {function} 回调函数
+     * @param callbackName {function} 回调函数名，需要放置在window下
      * @returns {*}
      */
-    shareWithCallback : function( data , callback ){
+    shareWithCallback : function( data , callback , callbackName ){
         try {
-            return bridge.callHandler('clientShare', JSON.stringify({
+            let shareData = {
                 title: data.title,
                 desc: data.desc,
                 img: data.img_url,
                 url: data.link
-            }),function(response){
-                if(typeof callback === 'function'){
-                    callback(response);
-                }
-            });
+            };
+            //4.3及以上版本才会执行回调
+            return compatibleOldVer( 'clientShare', shareData , callback , callbackName , 40300);
         } catch (_error) {
             return false;
         }
     },
-
 
     /**
      * 打开 基金列表页
