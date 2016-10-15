@@ -181,7 +181,8 @@ var bridgeXXX = {
                 title: data.title,
                 desc: data.desc,
                 img: data.img_url,
-                url: data.link
+                url: data.link,
+                shortMessage: data.shortMessage || ""
             }));
         } catch (_error) {
             return false;
@@ -205,7 +206,8 @@ var bridgeXXX = {
                 title: data.title,
                 desc: data.desc,
                 img: data.img_url,
-                url: data.link
+                url: data.link,
+                shortMessage: data.shortMessage || ""
             };
             //4.3及以上版本才会执行回调
             return compatibleOldVer( 'clientShare', shareData , callback , callbackName , 40300);
