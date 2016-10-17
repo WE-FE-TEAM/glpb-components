@@ -289,8 +289,17 @@ var bridgeXXX = {
     },
 
     /**
-     * 打开APP的交易所详情页
-     * @param productId {string} 交易所资产ID
+     * 打开APP的定期理财列表页
+     * @returns {*}
+     */
+    showExchangeListPage : function(){
+        let url = 'renrendaiInvestment://app.we.com/exchange/list';
+        location.href = url;
+    },
+
+    /**
+     * 打开APP的定期理财详情页
+     * @param productId {string} 定期理财资产ID
      */
     showExchangeDetailPage : function( productId ){
         let url = 'renrendaiInvestment://app.we.com/exchange/detail?productNo=' + encodeURIComponent( productId );
