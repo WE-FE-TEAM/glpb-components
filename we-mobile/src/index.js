@@ -26,6 +26,8 @@ const SwiperContainer = require('./components/swiper-container/swiper-container.
 
 const ReportTotalItem = require('./components/report-total-item/report-total-item.js');
 
+const AppDownloadBtn = require('./components/app-download-btn/app-download-btn.js');
+
 
 
 
@@ -37,5 +39,6 @@ module.exports = {
     FundItemList,
     SwiperItem,
     SwiperContainer,
-    ReportTotalItem
+    ReportTotalItem,
+    AppDownloadBtn
 };

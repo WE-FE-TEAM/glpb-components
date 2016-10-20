@@ -29,6 +29,7 @@ const RichText = ComponentBase.extend(
     {
         getDefaultStyle : function(){
             return {
+                position : 'relative',
                 height : 'auto',
                 width : 'auto',
                 padding : '0',
@@ -40,7 +41,8 @@ const RichText = ComponentBase.extend(
                     backgroundColor : 'transparent'
                 },
                 textAlign : 'left',
-                animation : 'none'
+                animation : 'none',
+                zIndex : 10
             };
         },
 

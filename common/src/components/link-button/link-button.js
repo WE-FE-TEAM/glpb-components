@@ -30,6 +30,7 @@ const LinkButton = ComponentBase.extend(
     {
         getDefaultStyle : function(){
             return {
+                position : 'relative',
                 height : '88px',
                 width : '80%',
                 padding : '0',
@@ -47,7 +48,8 @@ const LinkButton = ComponentBase.extend(
                 textAlign : 'center',
                 animation : 'none',
                 textDecoration : 'none',
-                borderRadius : '5px'
+                borderRadius : '5px',
+                zIndex : 10
             };
         },
 

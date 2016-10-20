@@ -86,6 +86,9 @@ const FundItemList = BaseComponent.extend(
             let data = this.data || {};
             let fundIdList = data.fundIdList || [];
             if( this.isProductionMode() && ! this.eventBinded && fundIdList.length > 0 ){
+                
+                this.eventBinded = true;
+                
                 //正式环境才绑定事件, 并且Ajax请求每个基金的详情数据
                 this.$content.on('click', '.glpb-fund-list-item', function(e){
                     let $target = $(e.currentTarget);

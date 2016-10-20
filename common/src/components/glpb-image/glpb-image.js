@@ -16,7 +16,7 @@ const $ = ComponentBase.$;
 
 const tpl = `<div class="glpb-fn-animate-item"><img /></div>`;
 
-const imageHolderURL = __uri('./assets/img-holder.png');
+const imageHolderURL = '//m.we.com/cms/577cdedf61e15053267301af/glpb-we/img-holder.png';
 
 const ImageView = ComponentBase.extend(
     {
@@ -31,10 +31,12 @@ const ImageView = ComponentBase.extend(
     {
         getDefaultStyle : function(){
             return {
+                position : 'relative',
                 height : 'auto',
                 width : 'auto',
                 margin : '0 auto',
-                animation : 'none'
+                animation : 'none',
+                zIndex : 10
             };
         },
 
