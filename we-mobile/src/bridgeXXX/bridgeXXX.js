@@ -235,14 +235,16 @@ var bridgeXXX = {
      * @returns {*}
      */
     showFundDetailPage : function( fundCode ,name ){
-        name = name || "基金详情";
-        try {
-            return bridge.callHandler('jumpAPPViewModule', JSON.stringify({
-                module: "QJFund",
-                page: "detail",
-                parameter: {code:fundCode,name:name}
-            }));
-        } catch (_error) {}
+        // name = name || "基金详情";
+        let url = 'renrendaiInvestment://app.we.com/fund/detail?code=' + encodeURIComponent( fundCode );
+        location.href = url;
+        // try {
+        //     return bridge.callHandler('jumpAPPViewModule', JSON.stringify({
+        //         module: "QJFund",
+        //         page: "detail",
+        //         parameter: {code:fundCode,name:name}
+        //     }));
+        // } catch (_error) {}
     },
 
     /**
@@ -369,6 +371,46 @@ var bridgeXXX = {
      */
     showNewAreaPage : function(){
         let url = 'renrendaiInvestment://app.we.com/newArea';
+        location.href = url;
+    },
+
+    /**
+     * 薪计划首页
+     */
+    showAutoinvestList : function(){
+        let url = 'renrendaiInvestment://app.we.com/salary/home';
+        location.href = url;
+    },
+
+    /**
+     * 注册页
+     */
+    showNoviceStep1 : function(){
+        let url = 'renrendaiInvestment://app.we.com/novice/step1';
+        location.href = url;
+    },
+
+    /**
+     * 民生开户页
+     */
+    showNoviceStep2 : function(){
+        let url = 'renrendaiInvestment://app.we.com/novice/step2';
+        location.href = url;
+    },
+
+    /**
+     * P2P充值页
+     */
+    showNoviceStep3 : function(){
+        let url = 'renrendaiInvestment://app.we.com/novice/step3';
+        location.href = url;
+    },
+
+    /**
+     * 加入页
+     */
+    showNoviceStep1 : function(){
+        let url = 'renrendaiInvestment://app.we.com/novice/indicator';
         location.href = url;
     }
 

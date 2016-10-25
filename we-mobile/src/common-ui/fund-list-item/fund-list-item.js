@@ -67,22 +67,21 @@ $.extend( FundListItem.prototype, {
         }
 
 
-        let html = `<h1 class="fund-name">${fundName}（${data.fundCode}）<span class="fund-span">${ tag }</span></h1>
+        let html = `<h1 class="fund-name">${fundName}<span class="fund-code">（${data.fundCode}）</span><span class="fund-span">${ tag }</span></h1>
                 <ul class="fund-content fn-clear">
                     <li class="fund-info info1">
                         <p class="year-rise">${data.rateYear}<span class="year-rise-span">%</span></p>
                         <p class="rise-text">年涨跌幅</p>
                     </li>
                     <li class="fund-info info2">
-                        <p class="year-net">${data.nav}<span class="year-net-span">元</span></p>
-                        <p class="rise-text">净值</p>
+                        <p class="year-net">${data.nav}<span class="year-net-span"></span></p>
+                        <p class="rise-text">净值(元)</p>
                     </li>
-                    <li class="fund-order-wrap"><div class="fund-order" id="gio-trick-${data.fundCode}">申购</div></li>
-                    <li class="split-line"></li>
                 </ul>
+                <div class="fund-buy-btn" id="gio-trick-${data.fundCode}">申购</div>
                 `;
 
-        this.$el.html( html ).addClass('glpb-fund-sug-theme-2').show();
+        this.$el.html( html ).addClass('glpb-fund-sug-theme-3').show();
     },
 
     bindEvent : function(){
@@ -103,7 +102,7 @@ $.extend( FundListItem.prototype, {
         let fundCode = fundData.fundCode;
 
         utilService.recordLog({
-            source : 'zhinang',
+            source : this.source,
             subsource : fundCode
         }).finally( () => {
             bridgeXXX.showFundDetailPage(fundCode);
