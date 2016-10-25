@@ -1,0 +1,104 @@
+
+@import "../../scss-common/_helper.scss";
+
+.glpb-ui-fund-list-item{
+
+}
+
+
+.glpb-ui-fund-list-item{
+
+  //样式2
+  &.glpb-fund-sug-theme-2{
+
+    display: none;
+    padding-bottom: px2rem(30);
+    margin-bottom: px2rem(24);
+    @include box-sizing(content-box);
+
+    .fund-name {
+      font-size: px2rem(26);
+      color: #404040;
+      height: px2rem(90);
+      line-height: px2rem(90);
+      border-bottom: 1px solid #f0f0f0;
+      text-indent: px2rem(30);
+      @include box-sizing(content-box);
+
+      .fund-span{
+        float: right;
+        margin-right: px2rem(30);
+        color: #ff721f;
+      }
+    }
+
+    .fund-content {
+      position: relative;
+      height: px2rem(157);
+      padding: px2rem(50) px2rem(30) 0 px2rem(30);
+      @include box-sizing(content-box);
+
+      .fund-info {
+        text-align: left;
+        width: px2rem(200);
+        float: left;
+        @include box-sizing(content-box);
+
+        .year-rise, .year-net {
+          color: #f77224;
+          font-size: px2rem(50);
+          .year-net-span, .year-rise-span {
+            font-size: px2rem(22);
+            margin-top: px2rem(11);
+          }
+        }
+
+        .rise-text {
+          color: #828282;
+          font-size: px2rem(22);
+        }
+
+        .year-net {
+          color: #404040;
+        }
+      }
+
+      .info2{
+        margin-left: px2rem(30);
+      }
+
+      .fund-order-wrap{
+
+        float: right;
+        margin: px2rem(29) 0 0 0;
+        @include box-sizing(content-box);
+
+        .fund-order{
+          width: px2rem(154);
+          height:px2rem(54);
+          line-height:px2rem(54);
+          @include border-radius(px2rem(3));
+          font-size:px2rem(26);
+          color:#ffffff;
+          text-align:center;
+          background:#ff721f;
+          margin:0;
+          @include box-sizing(content-box);
+        }
+
+      }
+
+      .split-line{
+        position: absolute;
+        width: 1px;
+        height: px2rem(104);
+        top: px2rem(54);
+        right: px2rem(235);
+        background: #f0f0f0;
+      }
+    }
+
+
+  }
+
+}

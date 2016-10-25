@@ -1,0 +1,26 @@
+
+@import "../../scss-common/_helper.scss";
+
+.glpb-com-glpb_we_com_fund_list_item{
+
+  &>.glpb-content{
+
+    .editor-place-holder-img{
+      display: block;
+      width: 100%;
+      border: 0 none;
+    }
+  }
+}
+
+//编辑器中的样式
+.gplb-sys-editor{
+  .glpb-com-glpb_we_com_fund_list_item{
+
+    &>.glpb-content{
+
+
+    }
+
+  }
+}

@@ -18,7 +18,9 @@ const Swiper = require('./lib/swiper/swiper.js');
 
 const ExchangeItemList = require('./components/exchange-item-list/exchange-item-list.js');
 
-const FundItemList = require('./components/fund-item-list/fund-item-list.js');
+// const FundItemList = require('./components/fund-item-list/fund-item-list.js');
+
+const FundListItem = require('./components/fund-list-item/fund-list-item.js');
 
 const SwiperItem = require('./components/swiper-item/swiper-item.js');
 
@@ -36,9 +38,9 @@ module.exports = {
     bridgeXXX,
     Swiper,
     ExchangeItemList,
-    FundItemList,
     SwiperItem,
     SwiperContainer,
     ReportTotalItem,
-    AppDownloadBtn
+    AppDownloadBtn,
+    FundListItem
 };
