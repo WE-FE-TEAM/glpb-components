@@ -24,6 +24,7 @@
       border-bottom: 1px solid #e6e6e6;
       text-indent: px2rem(30);
       @include box-sizing(content-box);
+      overflow: hidden;
 
       .fund-code{
         font-size: px2rem(22);

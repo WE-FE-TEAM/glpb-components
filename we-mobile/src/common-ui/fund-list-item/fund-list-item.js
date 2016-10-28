@@ -52,8 +52,8 @@ $.extend( FundListItem.prototype, {
         this.fundData = data;
 
         let fundName = data.fundName || '';
-        if( fundName.length > 10 ){
-            fundName = fundName.substr(0, 10) + '...';
+        if( fundName.length > 6 ){
+            fundName = fundName.substr(0, 6) + '...';
         }
 
         let remarkList = data.remarkList || [];
@@ -66,15 +66,25 @@ $.extend( FundListItem.prototype, {
             tag = data.remark || '';
         }
 
+        let rateYearCon = '--';
+        if( data.rateYear ){
+            rateYearCon = `${data.rateYear}<span class="year-rise-span">%</span>`;
+        }
+
+        let navCon = '--';
+        if( data.nav ){
+            navCon = `${data.nav}<span class="year-net-span"></span>`;
+        }
+
 
         let html = `<h1 class="fund-name">${fundName}<span class="fund-code">（${data.fundCode}）</span><span class="fund-span">${ tag }</span></h1>
                 <ul class="fund-content fn-clear">
                     <li class="fund-info info1">
-                        <p class="year-rise">${data.rateYear}<span class="year-rise-span">%</span></p>
+                        <p class="year-rise">${ rateYearCon }</p>
                         <p class="rise-text">年涨跌幅</p>
                     </li>
                     <li class="fund-info info2">
-                        <p class="year-net">${data.nav}<span class="year-net-span"></span></p>
+                        <p class="year-net">${ navCon }</p>
                         <p class="rise-text">净值(元)</p>
                     </li>
                 </ul>
