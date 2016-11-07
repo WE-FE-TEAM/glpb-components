@@ -407,10 +407,38 @@ var bridgeXXX = {
     },
 
     /**
-     * 加入页
+     * 打开APP的组合首页
+     * @returns {*}
      */
-    showNoviceStep1 : function(){
-        let url = 'renrendaiInvestment://app.we.com/novice/indicator';
+    showFofHomePage : function(){
+        let url = 'renrendaiInvestment://app.we.com/home/FOF';
+        location.href = url;
+    },
+
+    /**
+     * 打开APP的账户中心页
+     * @returns {*}
+     */
+    showUserHomePage : function(){
+        let url = 'renrendaiInvestment://app.we.com/home/user';
+        location.href = url;
+    },
+
+    /**
+     * 打开APP的保险支付页
+     * @returns {*}
+     */
+    showInsuranceRecommendPage : function(){
+        let url = 'renrendaiInvestment://app.we.com/insurancePay/recommend';
+        location.href = url;
+    },
+
+    /**
+     * 打开APP的优惠券列表页(4.3.1版本后)
+     * @returns {*}
+     */
+    showCouponListPage : function(){
+        let url = 'renrendaiInvestment://app.we.com/user/coupon/list';
         location.href = url;
     }
 
