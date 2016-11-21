@@ -66,7 +66,7 @@ $.extend( FundListItem.prototype, {
         let remarkList = data.remarkList || [];
         let tag = '';
         if( remarkList && remarkList.length > 0 ){
-            tag = remarkList[0];
+            tag = remarkList.join(',');
         }
 
         if( ! tag ){
@@ -121,10 +121,15 @@ $.extend( FundListItem.prototype, {
             
         }
 
-        let btnText = isNewFund ? '认购' : '申购';
+        let btnText = '申购';
+
+        if( isNewFund ){
+            btnText = '认购';
+            extraClass += ' fund-item-new';
+        }
 
 
-        let html = `<h1 class="fund-name ">${fundName}<span class="fund-code">（${data.fundCode}）</span><span class="fund-span">${ tag }</span></h1>
+        let html = `<h1 class="fund-name ">${fundName}<span class="fund-code">(${data.fundCode})</span><span class="fund-span">${ tag }</span></h1>
                 <ul class="fund-content fn-clear ${extraClass}">
                     <li class="fund-info info1">
                         <p class="year-rise">${ rateYearCon }</p>
