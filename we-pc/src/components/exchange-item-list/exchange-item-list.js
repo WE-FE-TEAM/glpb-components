@@ -181,6 +181,11 @@ const ExchangeItemList = BaseComponent.extend(
 
             let temp = actualAmount * 100 / totalAmount;
             if( ! isNaN( temp ) ){
+                let tempStr = temp + '';
+                if( tempStr.indexOf('.') >= 0 ){
+                    //包含小数点, 取一位小数
+                    temp = temp.toFixed(1);
+                }
                 progress = temp;
             }
 
