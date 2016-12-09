@@ -1,0 +1,92 @@
+
+@import "../../scss-common/_helper.scss";
+
+
+
+
+.glpb-ui-fof-list-item{
+     color:#ffffff;
+    .glpb-ui-title{
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+      padding-left:px2rem(30);;
+      padding-right:px2rem(30);
+      height:px2rem(79);
+      border-bottom: 1px solid #e6e6e6;
+      .type,.name{
+        height:px2rem(79);
+        line-height:px2rem(79);
+      }
+      .type{
+        color:#333333;
+        font-size:px2rem(28);
+        flex-grow:1;
+      }
+      .name{
+        color:#888888;
+        font-size:px2rem(24);
+      }
+
+    }
+
+    .glpb-ui-content{
+      display: flex;
+      flex-direction: row;
+      padding-left:px2rem(30);;
+      padding-right:px2rem(30);
+      margin-top:px2rem(35);
+      margin-bottom:px2rem(35);
+      .year-rate-wrp{
+
+        width:px2rem(230);
+        border-right: 1px solid #e6e6e6;
+        .year-rate{
+          font-size:px2rem(60);
+          line-height:px2rem(60);
+          span{
+            font-size:px2rem(28);
+          }
+        }
+        .year-rate-rise{
+            color:#ff721f;
+
+        }
+        .year-rate-sub{
+          color:#3cc67f;
+        }
+        .year-rate-text{
+          color:#888888;
+          font-size:px2rem(24);
+
+        }
+      }
+      .desc-wrp{
+          padding-left:px2rem(37);
+          .desc-big{
+            font-size:px2rem(32);
+            line-height:px2rem(70);
+            color:#333333;
+          }
+          .desc-small{
+            font-size:px2rem(24);
+            color:#ff721f;
+          }
+      }
+    }
+
+    .button{
+      width: px2rem(690);
+      height:px2rem(80);
+      line-height:px2rem(80);
+      margin: 0 auto;
+      @include border-radius(px2rem(3));
+      font-size:px2rem(32);
+      color:#ffffff;
+      text-align:center;
+      background:#ff721f;
+      @include box-sizing(content-box);
+    }
+
+
+}

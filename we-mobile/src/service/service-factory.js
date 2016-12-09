@@ -12,13 +12,14 @@ const utilService = require('./sub/util-service');
 
 const fundService = require('./sub/fund-service.js');
 const exchangeService = require('./sub/exchange-service.js');
+const fofService = require('./sub/fof-service.js');
 
 let serviceMap = {
     passport : passportService,
     util : utilService,
-
     fund : fundService,
-    exchange : exchangeService
+    exchange : exchangeService,
+    fof:fofService
 
 };
 
